@@ -20,6 +20,14 @@ public:
 };
 #endif
 
+#ifdef ENGINE_COMPILE_DIRECTX
+class DirectXGraphicsFactory : public GraphicsFactory {
+  public:
+  std::shared_ptr<Shader> createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true) override;
+
+};
+#endif
+
 class FactoryManager {
 public:
   static std::unique_ptr<GraphicsFactory> graphics_factory;

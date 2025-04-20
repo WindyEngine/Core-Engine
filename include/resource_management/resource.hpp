@@ -21,7 +21,7 @@ protected:
 public:
   int resource_id;
   std::string name;
-  bool loaded;
+  bool loaded = false;
   bool lazy;
   uint32_t version = 0;
   ResourceType resource_type;

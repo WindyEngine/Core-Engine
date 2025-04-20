@@ -46,20 +46,18 @@ void File::stopWatching() {
 std::string File::read() {
   this->load();
 
-  char * buffer = 0;
-  long length;
-  FILE * f = fopen(this->path.c_str(), "rb");
+  std::string content;
+  FILE* f = fopen(this->path.c_str(), "rb");
 
   if (f) {
-    fseek (f, 0, SEEK_END);
-    length = ftell (f);
-    fseek (f, 0, SEEK_SET);
-    buffer = (char*) malloc (length);
-    if (buffer) {
-      fread (buffer, 1, length, f);
-    }
-    fclose (f);
+    fseek(f, 0, SEEK_END);
+    long length = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    content.resize(length); // Allocate enough space
+    fread(&content[0], 1, length, f); // Safe because std::string stores data contiguously
+    fclose(f);
   }
 
-  return std::string(buffer);
+  return content;
 }

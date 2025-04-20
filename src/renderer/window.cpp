@@ -68,10 +68,15 @@ bool VulkanWindow::shouldClose(){
 
 
 #ifdef ENGINE_COMPILE_DIRECTX
-
+ID3D11DeviceContext* DirectXWindow::context = nullptr;
+ID3D11Device* DirectXWindow::device = nullptr;
 DirectXWindow::DirectXWindow(int width, int height, const char* name) : _width(width), _height(height), _windowName(name) {}
 
 DirectXWindow::~DirectXWindow(){
+    DirectXWindow::context->Release();
+    DirectXWindow::device->Release();
+    renderTargetView->Release();
+    swapChain->Release();
     glfwDestroyWindow(_window);
     glfwTerminate();
 }
@@ -106,16 +111,29 @@ void DirectXWindow::initWindow(){
     backBuffer->Release(); //release the backbuffer (the render target view holds the refrence now so its useless to hold it any longer)
 }
 
-float DirectXWindow::update(){
-    glfwPollEvents();
 
+void DirectXWindow::clear(){
     context->OMSetRenderTargets(1, &renderTargetView, nullptr); //tells dx to actually draw on the RT
 
     float clearColor[] = {0.1f, 0.2f, 0.3f, 1.0f}; //the color format for the window (rgba) you can change it to whatever color
     context->ClearRenderTargetView(renderTargetView, clearColor); //clears the backbuffer which is now the RTV to the clearColor format (blue atm)
-    swapChain->Present(1,0); //presents the backbuffer after its "drawn" on
 
-    return glfwGetTime();
+    D3D11_VIEWPORT viewport = {};
+    viewport.Width = _width;
+    viewport.Height = _height;
+    viewport.TopLeftX = 0.0f;
+    viewport.TopLeftY = 0.0f;
+    DirectXWindow::context->RSSetViewports(1, &viewport);
+}
+
+void DirectXWindow::show(){
+    glfwPollEvents();
+
+    swapChain->Present(1,0); //presents the backbuffer after its "drawn" on
+}
+
+float DirectXWindow::update(){
+    return 1.0;
 }
 
 bool DirectXWindow::shouldClose(){

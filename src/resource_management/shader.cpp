@@ -7,6 +7,7 @@
 #include <glad/glad.h>
 #endif
 
+using namespace engine::rendering;
 using namespace engine::resource_management;
 
 Shader::Shader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) :
@@ -177,5 +178,57 @@ void MetalShader::useShader() {
   if (pipeline_state && currentEncoder) {
     [currentEncoder setRenderPipelineState:pipeline_state];
   }
+}
+#endif
+
+#ifdef ENGINE_COMPILE_DIRECTX
+DirectShader::DirectShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) :
+Shader(vertex, fragment, name, lazy) {
+  if (!lazy) this->load();
+}
+DirectShader::~DirectShader() {
+  this->unload();
+}
+
+void DirectShader::load(){
+  if (this->loaded) return;
+
+  ID3DBlob* vertexShaderBlob = nullptr;
+  D3DCompile(this->vertex_shader->read().c_str(), strlen(this->vertex_shader->read().c_str()),  nullptr, nullptr, nullptr, "main", "vs_5_0", 0, 0, &vertexShaderBlob, nullptr);
+
+  ID3D11VertexShader* vertexShader = nullptr;
+  DirectXWindow::device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), nullptr, &vertexShader);
+
+  ID3DBlob* pixelShaderBlob = nullptr;
+  D3DCompile(this->fragment_shader->read().c_str(), strlen(this->fragment_shader->read().c_str()), nullptr, nullptr, nullptr, "main", "ps_5_0", 0, 0, &pixelShaderBlob, nullptr);
+
+  ID3D11PixelShader* pixelShader = nullptr;
+  DirectXWindow::device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), nullptr, &pixelShader);
+
+  D3D11_INPUT_ELEMENT_DESC layout[] = {
+    {"POSITION", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+  };
+
+  DirectXWindow::device->CreateInputLayout(layout, ARRAYSIZE(layout), vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &this->inputLayout);
+
+  vertexShaderBlob->Release();
+  pixelShaderBlob->Release();
+
+  DirectXWindow::context->IASetInputLayout(this->inputLayout);
+
+  DirectXWindow::context->VSSetShader(vertexShader, nullptr, 0);
+  DirectXWindow::context->PSSetShader(pixelShader, nullptr, 0);
+  
+  this->loaded = true;
+}
+
+void DirectShader::unload(){
+  if(!this->loaded) return;
+
+  this->loaded = false;
+}
+
+void DirectShader::useShader(){
+  this->load();
 }
 #endif

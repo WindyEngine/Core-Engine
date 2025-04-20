@@ -3,9 +3,16 @@
 #include <memory>
 #include <resource_management/resource.hpp>
 #include <resource_management/file.hpp>
+#include <renderer/window.hpp>
 
 namespace engine::resource_management {
 
+class ShaderLayout {
+  public:
+    std::string name;
+    int index, size, stride, offset;
+    
+};
 class Shader : public Resource {
 public:
   std::shared_ptr<File> vertex_shader;
@@ -16,7 +23,7 @@ public:
 
   void linkDependencies() override;
 
-  virtual void useShader() {};
+  virtual void useShader() {this->load();};
 };
 
 #ifdef ENGINE_COMPILE_OPENGL
@@ -55,6 +62,19 @@ public:
   ~MetalShader();
 
   void useShader() override;
+};
+#endif
+
+#ifdef ENGINE_COMPILE_DIRECTX
+class DirectShader : public Shader {
+  private:
+    void load() override;
+    void unload() override;
+  public:
+    void useShader() override;
+    ID3D11InputLayout* inputLayout = nullptr;
+    DirectShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
+    ~DirectShader();
 };
 #endif
 

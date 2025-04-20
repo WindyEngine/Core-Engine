@@ -11,8 +11,7 @@ int main() {
   /* Resource Management Shit */
   using namespace engine::resource_management;
 
-  ResourceManager manager(true);
-  manager.setGraphicsLoader(core::GraphicsAPI::OpenGL);
+
 
   //std::cout << "\nTesting\n" << std::endl;
   //Shader* shader = manager.loadShader("/home/Zenjar/Documents/projects/graphics_assets/shader.vert", "/home/Zenjar/Documents/projects/graphics_assets/shader.frag").get();
@@ -22,14 +21,7 @@ int main() {
 #ifdef ENGINE_COMPILE_DIRECTX
     std::cout << "Initializing DX window..." << std::endl;
 
-    DirectXWindow window(800, 600, "DX Window");
-    window.initWindow();
-
-    float dt = 0;
-
-    while (!window.shouldClose()) {
-        dt = window.update();
-    }
+    DirectXTriangle();
 
     std::cout << "Window closed successfully." << std::endl;
 #endif

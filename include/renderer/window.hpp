@@ -8,8 +8,10 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <d3d11.h>
 #include <dxgi.h>
+#include <d3dcompiler.h>
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3dcompiler.lib")
 #endif
 
 #ifdef ENGINE_COMPILE_VULKAN
@@ -40,6 +42,8 @@ namespace engine::rendering {
             virtual void initWindow() = 0;
             virtual bool shouldClose() = 0;
             virtual float update() = 0;
+            virtual void clear() = 0;
+            virtual void show() = 0;
     };
 
 #ifdef ENGINE_COMPILE_OPENGL
@@ -101,23 +105,24 @@ namespace engine::rendering {
 #ifdef ENGINE_COMPILE_DIRECTX
     class DirectXWindow : public Window {
         public:
+            IDXGISwapChain* swapChain = nullptr;
+            static ID3D11DeviceContext* context;
+            static ID3D11Device* device;
+            ID3D11RenderTargetView* renderTargetView = nullptr;
             DirectXWindow(int width, int height, const char* name);
             ~DirectXWindow() override;
 
             void initWindow() override;
             bool shouldClose() override;
             float update() override;
+            void  clear() override;
+            void  show() override;
 
         private:
             int _width;
             int _height;
             const char* _windowName;
             GLFWwindow* _window;
-            IDXGISwapChain* swapChain = nullptr;
-            ID3D11DeviceContext* context = nullptr;
-            ID3D11Device* device = nullptr;
-            ID3D11RenderTargetView* renderTargetView = nullptr;
-            
     };
 #endif
 }

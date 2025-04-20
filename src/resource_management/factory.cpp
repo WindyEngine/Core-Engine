@@ -21,7 +21,7 @@ void FactoryManager::setGraphicsAPI(core::GraphicsAPI api) {
 #endif
 #ifdef ENGINE_COMPILE_DIRECTX
     case core::GraphicsAPI::DirectX:
-      //graphics_factory = std::make_unique<DirectXGraphicsFactory>();
+      graphics_factory = std::make_unique<DirectXGraphicsFactory>();
       break;
 #endif
 #ifdef ENGINE_COMPILE_METAL
@@ -35,5 +35,11 @@ void FactoryManager::setGraphicsAPI(core::GraphicsAPI api) {
 #ifdef ENGINE_COMPILE_OPENGL
 std::shared_ptr<Shader> OpenGLGraphicsFactory::createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) {
   return std::make_shared<OpenGLShader>(vertex, fragment, name, lazy);
+}
+#endif
+
+#ifdef ENGINE_COMPILE_DIRECTX
+std::shared_ptr<Shader> DirectXGraphicsFactory::createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) {
+  return std::make_shared<DirectShader>(vertex, fragment, name, lazy);
 }
 #endif

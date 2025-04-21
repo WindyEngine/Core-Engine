@@ -17,8 +17,11 @@ resource_type(type), lazy(lazy) {
 }
 
 void Resource::reload() {
+  if (!this->loaded) return;
   this->unload();
   this->load();
+
+  this->version++;
 
   for (std::weak_ptr<Resource>& resource : dependents) {
     if (auto dep = resource.lock()) {

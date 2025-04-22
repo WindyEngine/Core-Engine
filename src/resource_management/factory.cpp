@@ -16,7 +16,7 @@ void FactoryManager::setGraphicsAPI(core::GraphicsAPI api) {
 #endif
 #ifdef ENGINE_COMPILE_VULKAN
     case core::GraphicsAPI::Vulkan:
-      //graphics_factory = std::make_unique<VulkanGraphicsFactory>();
+      graphics_factory = std::make_unique<VulkanGraphicsFactory>();
       break;
 #endif
 #ifdef ENGINE_COMPILE_DIRECTX
@@ -26,7 +26,7 @@ void FactoryManager::setGraphicsAPI(core::GraphicsAPI api) {
 #endif
 #ifdef ENGINE_COMPILE_METAL
     case core::GraphicsAPI::Metal:
-      //graphics_factory = std::make_unique<MetalGraphicsFactory>();
+      graphics_factory = std::make_unique<MetalGraphicsFactory>();
       break;
 #endif
   }
@@ -35,6 +35,18 @@ void FactoryManager::setGraphicsAPI(core::GraphicsAPI api) {
 #ifdef ENGINE_COMPILE_OPENGL
 std::shared_ptr<Shader> OpenGLGraphicsFactory::createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) {
   return std::make_shared<OpenGLShader>(vertex, fragment, name, lazy);
+}
+#endif
+
+#ifdef ENGINE_COMPILE_VULKAN
+std::shared_ptr<Shader> VulkanGraphicsFactory::createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) {
+  return std::make_shared<VulkanShader>(vertex, fragment, name, lazy);
+}
+#endif
+
+#ifdef ENGINE_COMPILE_METAL
+std::shared_ptr<Shader> MetalGraphicsFactory::createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) {
+  return std::make_shared<MetalShader>(vertex, fragment, name, lazy);
 }
 #endif
 

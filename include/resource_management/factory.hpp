@@ -20,6 +20,20 @@ public:
 };
 #endif
 
+#ifdef ENGINE_COMPILE_VULKAN
+class VulkanGraphicsFactory : public GraphicsFactory {
+public:
+  std::shared_ptr<Shader> createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true) override;
+};
+#endif
+
+#ifdef ENGINE_COMPILE_METAL
+class MetalGraphicsFactory : public GraphicsFactory {
+public:
+  std::shared_ptr<Shader> createShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true) override;
+};
+#endif
+
 #ifdef ENGINE_COMPILE_DIRECTX
 class DirectXGraphicsFactory : public GraphicsFactory {
   public:

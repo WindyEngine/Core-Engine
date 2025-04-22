@@ -44,6 +44,18 @@ public:
 };
 #endif
 
+#ifdef ENGINE_COMPILE_VULKAN
+class VulkanShader : public Shader {
+private:
+  void load() override;
+  void unload() override;
+
+public:
+  VulkanShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
+  ~VulkanShader();
+};
+#endif
+
 #ifdef ENGINE_COMPILE_METAL
 #import <Metal/Metal.h>
 

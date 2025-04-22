@@ -98,6 +98,27 @@ void OpenGLShader::useShader() {
 }
 #endif
 
+#ifdef ENGINE_COMPILE_VULKAN
+VulkanShader::VulkanShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true) {
+  if (!lazy) this->load();
+}
+VulkanShader::~VulkanShader() {
+  this->unload();
+}
+
+void VulkanShader::load() {
+  if (this->loaded) return;
+
+  this->loaded = true;
+}
+
+void VulkanShader::unload() {
+  if (!this->loaded) return;
+
+  this->loaded = false;
+}
+#endif
+
 #ifdef ENGINE_COMPILE_METAL
 #import <Metal/Metal.h>
 #import <Foundation/Foundation.h>

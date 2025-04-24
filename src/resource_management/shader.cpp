@@ -99,7 +99,8 @@ void OpenGLShader::useShader() {
 #endif
 
 #ifdef ENGINE_COMPILE_VULKAN
-VulkanShader::VulkanShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true) {
+VulkanShader::VulkanShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) :
+Shader(vertex, fragment, name, lazy) {
   if (!lazy) this->load();
 }
 VulkanShader::~VulkanShader() {
@@ -120,11 +121,6 @@ void VulkanShader::unload() {
 #endif
 
 #ifdef ENGINE_COMPILE_METAL
-#import <Metal/Metal.h>
-#import <Foundation/Foundation.h>
-
-using namespace engine::resource_management;
-
 MetalShader::MetalShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) :
 Shader(vertex, fragment, name, lazy) {
   if (!lazy) this->load();
@@ -136,8 +132,6 @@ MetalShader::~MetalShader() {
 
 void MetalShader::load() {
   if (this->loaded) return;
-
-  std::cout << "Loading MetalShader" << std::endl;
 
   id<MTLDevice> device = MTLCreateSystemDefaultDevice();
   if (!device) {

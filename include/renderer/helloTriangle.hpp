@@ -44,10 +44,10 @@ void openGLTriangle() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    shader->useShader();
     
     while (!window.shouldClose()) {
         window.clear();
+        shader->useShader();
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
         window.show();

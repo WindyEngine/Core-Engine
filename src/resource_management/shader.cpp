@@ -214,31 +214,39 @@ DirectShader::~DirectShader() {
 void DirectShader::load(){
   if (this->loaded) return;
 
-  ID3DBlob* vertexShaderBlob = nullptr;
-  D3DCompile(this->vertex_shader->read().c_str(), strlen(this->vertex_shader->read().c_str()),  nullptr, nullptr, nullptr, "main", "vs_5_0", 0, 0, &vertexShaderBlob, nullptr);
+  //Shader compilation and creation START
+  ID3DBlob* vertexShaderBlob = nullptr; //create a pointer for the shader.hlsl file which will be used to create the shader 
+  D3DCompile(this->vertex_shader->read().c_str(), strlen(this->vertex_shader->read().c_str()),  nullptr, nullptr, nullptr, "main", "vs_5_0", 0, 0, &vertexShaderBlob, nullptr); //this will actually compile the shader and turns into byte code which the shader blob will point to
 
-  ID3D11VertexShader* vertexShader = nullptr;
-  DirectXWindow::device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), nullptr, &vertexShader);
+  ID3D11VertexShader* vertexShader = nullptr; //creates a pointer for the actual shader after compilation
+  DirectXWindow::device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), nullptr, &vertexShader); //creates the shader by getting the buffer location and size in the memory and output it to the vertexShader for the GPU to render
+  //Shader compilation and creation END
 
-  ID3DBlob* pixelShaderBlob = nullptr;
-  D3DCompile(this->fragment_shader->read().c_str(), strlen(this->fragment_shader->read().c_str()), nullptr, nullptr, nullptr, "main", "ps_5_0", 0, 0, &pixelShaderBlob, nullptr);
+  //pixel(fragment) compilation and creation START
+  ID3DBlob* pixelShaderBlob = nullptr; //create a pointer for the pixel.hlsl file which will be used to create the pixels 
+  D3DCompile(this->fragment_shader->read().c_str(), strlen(this->fragment_shader->read().c_str()), nullptr, nullptr, nullptr, "main", "ps_5_0", 0, 0, &pixelShaderBlob, nullptr); //this will actually compile the shader and turns into byte code which the shader blob will point to
 
-  ID3D11PixelShader* pixelShader = nullptr;
-  DirectXWindow::device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), nullptr, &pixelShader);
+  ID3D11PixelShader* pixelShader = nullptr; //creates a pointer for the actual pixel after compilation
+  DirectXWindow::device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), nullptr, &pixelShader); //this will actually compile the shader and turns into byte code which the shader blob will point to
+  //pixel(fragment) compilation and creation END
 
+  //LAYOUT CRAETION START
+  //the layout is basically how the GPU should interpet the buffer based on rules that you set
   D3D11_INPUT_ELEMENT_DESC layout[] = {
     {"POSITION", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-  };
+  }; //this defines how the shader input should be interpeted 
+  
 
-  DirectXWindow::device->CreateInputLayout(layout, ARRAYSIZE(layout), vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &this->inputLayout);
+  DirectXWindow::device->CreateInputLayout(layout, ARRAYSIZE(layout), vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &this->inputLayout); //this actually creates the layout which tells the GPU how to interpet th vertex buffer based on the shaders
+  //LAYOUT CREATION END
 
-  vertexShaderBlob->Release();
-  pixelShaderBlob->Release();
+  vertexShaderBlob->Release(); //gets rid of the blob because its not needed anymore
+  pixelShaderBlob->Release(); //gets rid of the blob because its not needed anymore
 
-  DirectXWindow::context->IASetInputLayout(this->inputLayout);
+  DirectXWindow::context->IASetInputLayout(this->inputLayout); //sets the layout which is needed before the draw function is called
 
-  DirectXWindow::context->VSSetShader(vertexShader, nullptr, 0);
-  DirectXWindow::context->PSSetShader(pixelShader, nullptr, 0);
+  DirectXWindow::context->VSSetShader(vertexShader, nullptr, 0); //sets the vertex shader in the render pipeline
+  DirectXWindow::context->PSSetShader(pixelShader, nullptr, 0); //sets the pixel shader
   
   this->loaded = true;
 }

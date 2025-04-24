@@ -118,12 +118,15 @@ void DirectXWindow::clear(){
     float clearColor[] = {0.1f, 0.2f, 0.3f, 1.0f}; //the color format for the window (rgba) you can change it to whatever color
     context->ClearRenderTargetView(renderTargetView, clearColor); //clears the backbuffer which is now the RTV to the clearColor format (blue atm)
 
+    //View Port Creation
+    //view Port is simply an designated area in the created DX window that the context will draw on
     D3D11_VIEWPORT viewport = {};
     viewport.Width = _width;
     viewport.Height = _height;
     viewport.TopLeftX = 0.0f;
     viewport.TopLeftY = 0.0f;
     DirectXWindow::context->RSSetViewports(1, &viewport);
+    //View Port Creation
 }
 
 void DirectXWindow::show(){

@@ -13,6 +13,7 @@ class ShaderLayout {
     int index, size, stride, offset;
     
 };
+
 class Shader : public Resource {
 public:
   std::shared_ptr<File> vertex_shader;
@@ -57,8 +58,6 @@ public:
 #endif
 
 #ifdef ENGINE_COMPILE_METAL
-#import <Metal/Metal.h>
-
 class MetalShader : public Shader {
 private:
   void load() override;

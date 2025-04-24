@@ -22,18 +22,28 @@ void OpenGLWindow::initWindow() {
 
     glfwMakeContextCurrent(_window);
 
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize GLAD\n";
+        return;
+    }
+
     glfwSetWindowUserPointer(this->_window, this);
 }
 
-float OpenGLWindow::update() {
+void OpenGLWindow::clear() {
+    glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glViewport(0, 0, _width, _height);
+}
+
+void OpenGLWindow::show() {
     glfwSwapBuffers(_window);
     glfwPollEvents();
+}
 
-    float currentFrame = glfwGetTime();
-    float deltaTime = currentFrame - _lastFrame;
-    _lastFrame = currentFrame;
-
-    return deltaTime;
+float OpenGLWindow::update() {
+    return 1.0;
 }
 
 bool OpenGLWindow::shouldClose() {

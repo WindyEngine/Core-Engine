@@ -55,6 +55,8 @@ namespace engine::rendering {
             void initWindow() override;
             bool shouldClose() override;
             float update() override;
+            void clear() override;
+            void show() override;
 
         private:
             GLFWwindow* _window;

@@ -18,10 +18,10 @@ int main() {
   //std::cout << "\nEnd Testing\n" << std::endl;
 
 
-#ifdef ENGINE_COMPILE_DIRECTX
-    std::cout << "Initializing DX window..." << std::endl;
+#ifdef ENGINE_COMPILE_OPENGL
+    std::cout << "Initializing OpenGL window..." << std::endl;
 
-    DirectXTriangle();
+    openGLTriangle();
 
     std::cout << "Window closed successfully." << std::endl;
 #endif

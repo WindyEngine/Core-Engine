@@ -12,32 +12,46 @@ using namespace engine::rendering;
 using namespace engine::resource_management;
 
 #ifdef ENGINE_COMPILE_OPENGL
-unsigned int VAO;
 
-OpenGLShader shader(
-    std::make_shared<File>("path/to/vertex_shader.vert"),
-    std::make_shared<File>("path/to/fragment_shader.frag")
-);
-
-void openGLTriangleTest() {
+void openGLTriangle() {
     float vertices[] = {
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         0.0f,  0.5f, 0.0f
     };
     
-    glGenVertexArrays(1, &VAO);
+    OpenGLWindow window(800, 600, "OpenGL Window");
+    window.initWindow();
     
     unsigned int VBO;
     glGenBuffers(1, &VBO);
+
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
     
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
-    shader.useShader();
+    ResourceManager::config.hot_reload = true;
+    ResourceManager::setGraphicsLoader(GraphicsAPI::OpenGL);
+
+    std::shared_ptr<Shader> shader = ResourceManager::loadShader("C:/Users/acer/Documents/My-Projects/Graphics/graphics/shaders/vertexShader.vert", "C:/Users/acer/Documents/My-Projects/Graphics/graphics/shaders/fragmentShader.frag");
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    shader->useShader();
+    
+    while (!window.shouldClose()) {
+        window.clear();
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        window.show();
+    }
 
 }
 #endif

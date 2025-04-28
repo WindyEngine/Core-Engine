@@ -13,6 +13,10 @@ ShaderStorage ResourceManager::_shader_storage = ShaderStorage();
 void ResourceManager::setGraphicsLoader(core::GraphicsAPI api) {
   FactoryManager::setGraphicsAPI(api);
 }
+void ResourceManager::cleanUp() {
+  _file_storage.clean();
+  _shader_storage.clean();
+}
 
 std::shared_ptr<File> ResourceManager::getFile(std::string name) {
   return _file_storage.get(name);

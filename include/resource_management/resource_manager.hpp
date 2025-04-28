@@ -22,6 +22,7 @@ public:
   static ResourceManagerConfig config;
 
   static void setGraphicsLoader(core::GraphicsAPI api);
+  static void cleanUp();
 
   static std::shared_ptr<File> getFile(std::string name);
   static std::shared_ptr<Shader> getShader(std::string name);

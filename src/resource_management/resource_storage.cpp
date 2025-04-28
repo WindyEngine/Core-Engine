@@ -1,3 +1,4 @@
+#include "resource_management/resources/file.hpp"
 #include <memory>
 #include <resource_management/factory.hpp>
 #include <resource_management/resource_storage.hpp>
@@ -5,12 +6,19 @@
 
 using namespace engine::resource_management;
 
-std::map<std::string, std::shared_ptr<File>> FileStorage::_storage = {};
-std::map<std::string, std::shared_ptr<Shader>> ShaderStorage::_storage = {};
+std::map<std::string, std::weak_ptr<File>> FileStorage::_storage = {};
+std::map<std::string, std::weak_ptr<Shader>> ShaderStorage::_storage = {};
+
+void FileStorage::clean() {
+  for (auto it = _storage.begin(); it != _storage.end();) {
+    if (it->second.expired()) it = _storage.erase(it);
+    else it++;
+  }
+}
 
 std::shared_ptr<File> FileStorage::get(std::string name) {
   auto file = _storage.find(name);
-  if (file != _storage.end()) return file->second;
+  if (file != _storage.end()) return file->second.lock();
   return nullptr;
 }
 
@@ -23,9 +31,16 @@ std::shared_ptr<File> FileStorage::load(std::string path, std::string name, bool
   return file;
 }
 
+void ShaderStorage::clean() {
+  for (auto it = _storage.begin(); it != _storage.end();) {
+    if (it->second.expired()) it = _storage.erase(it);
+    else it++;
+  }
+}
+
 std::shared_ptr<Shader> ShaderStorage::get(std::string name) {
   auto shader = _storage.find(name);
-  if (shader != _storage.end()) return shader->second;
+  if (shader != _storage.end()) return shader->second.lock();
   return nullptr;
 }
 

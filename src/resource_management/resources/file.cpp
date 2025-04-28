@@ -1,7 +1,5 @@
-#include "filewatch/FileWatch.hpp"
-#include <memory>
-#include <resource_management/file.hpp>
 #include <stdio.h>
+#include <resource_management/resources/file.hpp>
 
 
 using namespace engine::resource_management;

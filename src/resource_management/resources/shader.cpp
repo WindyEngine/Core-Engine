@@ -1,7 +1,8 @@
 #include <iostream>
 #include <memory>
-#include <resource_management/shader.hpp>
 #include <string>
+#include <resource_management/resources/shader.hpp>
+
 
 #ifdef ENGINE_COMPILE_OPENGL
 #include <glad/glad.h>

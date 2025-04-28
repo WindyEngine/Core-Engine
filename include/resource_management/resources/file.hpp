@@ -1,9 +1,9 @@
 #pragma once
 
 #include <memory>
-#include <resource_management/resource.hpp>
 #include <string>
 #include <filewatch/FileWatch.hpp>
+#include <resource_management/resources/resource.hpp>
 
 
 namespace engine::resource_management {

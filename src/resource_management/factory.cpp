@@ -1,4 +1,3 @@
-#include "resource_management/shader.hpp"
 #include <memory>
 #include <resource_management/factory.hpp>
 

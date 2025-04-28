@@ -1,4 +1,5 @@
 #include <memory>
+#include <resource_management/factory.hpp>
 #include <resource_management/resource_manager.hpp>
 
 

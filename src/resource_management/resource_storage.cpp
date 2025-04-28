@@ -1,6 +1,5 @@
-#include "resource_management/factory.hpp"
-#include "resource_management/shader.hpp"
 #include <memory>
+#include <resource_management/factory.hpp>
 #include <resource_management/resource_storage.hpp>
 
 

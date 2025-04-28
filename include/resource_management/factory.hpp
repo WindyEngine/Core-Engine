@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <core/types.hpp>
-#include <resource_management/shader.hpp>
+#include <resource_management/resources/shader.hpp>
 #include <string>
 
 

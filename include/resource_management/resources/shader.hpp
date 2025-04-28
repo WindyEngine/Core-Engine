@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include <resource_management/resource.hpp>
-#include <resource_management/file.hpp>
+#include <resource_management/resources/resource.hpp>
+#include <resource_management/resources/file.hpp>
 #include <renderer/window.hpp>
 
 namespace engine::resource_management {

@@ -1,6 +1,5 @@
 #include <chrono>
-#include <resource_management/resource.hpp>
-#include <string>
+#include <resource_management/resources/resource.hpp>
 
 
 using namespace engine::resource_management;

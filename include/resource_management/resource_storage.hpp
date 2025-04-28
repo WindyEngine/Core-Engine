@@ -2,7 +2,8 @@
 
 #include <map>
 #include <memory>
-#include <resource_management/factory.hpp>
+#include <resource_management/resources/file.hpp>
+#include <resource_management/resources/shader.hpp>
 
 
 namespace engine::resource_management {

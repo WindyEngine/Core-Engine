@@ -1,15 +1,16 @@
-#include <core/types.hpp>
-#include <renderer/window.hpp>
-#include <resource_management/resource_manager.hpp>
-#include <renderer/helloTriangle.hpp>
+//#include <core/types.hpp>
+#include <core/graphics_common.hpp>
+//#include <renderer/window.hpp>
+//#include <resource_management/resource_manager.hpp>
+//#include <renderer/helloTriangle.hpp>
 
-using namespace engine;
-using namespace engine::rendering;
+//using namespace engine;
+//using namespace engine::rendering;
 
 int main() {
 
   /* Resource Management Shit */
-  using namespace engine::resource_management;
+  //using namespace engine::resource_management;
 
 
 
@@ -18,13 +19,13 @@ int main() {
   //std::cout << "\nEnd Testing\n" << std::endl;
 
 
-#ifdef ENGINE_COMPILE_OPENGL
-    std::cout << "Initializing OpenGL window..." << std::endl;
+/*#ifdef ENGINE_COMPILE_DIRECTX
+    std::cout << "Initializing DX window..." << std::endl;
 
     openGLTriangle();
 
     std::cout << "Window closed successfully." << std::endl;
-#endif
+#endif*/
 
   return 0;
 }

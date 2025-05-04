@@ -2,98 +2,52 @@
 
 #include <memory>
 #include <resource_management/resources/resource.hpp>
-#include <resource_management/resources/file.hpp>
-#include <platform/window.hpp>
 
 namespace engine::resource_management {
 
-class ShaderLayout {
-  public:
-    std::string name;
-    int index, size, stride, offset;
-    
-};
-
+/**
+ * @brief Represents a GPU shader resource (e.g., vertex/fragment shader).
+ *
+ * Provides logic for loading and unloading shader data from file.
+ * This class inherits from the generic Resource interface.
+ */
 class Shader : public Resource {
 public:
-  std::shared_ptr<File> vertex_shader;
-  std::shared_ptr<File> fragment_shader;
+  /**
+   * @brief Inherit constructor from Resource.
+   *
+   * Initializes a Shader with the given file path.
+   */
+  using Resource::Resource;
 
-  Shader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
-  ~Shader() = default;
-
-  void linkDependencies() override;
-
-  virtual void useShader() {this->load();};
-};
-
-#ifdef ENGINE_COMPILE_OPENGL
-class OpenGLShader : public Shader {
-private:
-  unsigned int vertex_shader_id;
-  unsigned int fragment_shader_id;
-  unsigned int shader_program_id;
-
+  /**
+   * @brief Loads the shader from its file.
+   *
+   * Typically compiles shader code and prepares GPU resources.
+   */
   void load() override;
+  /**
+   * @brief Unloads the shader and releases any GPU memory.
+   */
   void unload() override;
+};
 
+/**
+ * @brief Resource loader for Shader objects.
+ *
+ * Responsible for creating and optionally loading Shader resources
+ * from a given file path.
+ */
+class ShaderLoader : public ResourceLoader {
 public:
-  OpenGLShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
-  ~OpenGLShader();
-
-  void useShader() override;
+  /**
+   * @brief Loads a Shader resource from the specified path.
+   *
+   * @param path Path to the shader file.
+   * @param lazy If true, the shader is created but not loaded immediately.
+   * @return Shared pointer to the created Shader resource.
+   */
+  std::shared_ptr<Resource> load(std::string path, bool lazy) override;
 };
-#endif
-
-#ifdef ENGINE_COMPILE_VULKAN
-class VulkanShader : public Shader {
-private:
-  void load() override;
-  void unload() override;
-
-  VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
-  VkRenderPass renderPass = VK_NULL_HANDLE;
-  VkCommandPool commandPool = VK_NULL_HANDLE;
-  static uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
-
-
-public:
-  VulkanShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
-  ~VulkanShader();
-  void useShader() override;
-};
-#endif
-
-#ifdef ENGINE_COMPILE_METAL
-class MetalShader : public Shader {
-private:
-  void load() override;
-  void unload() override;
-
-public:
-  id<MTLLibrary> library;
-  id<MTLFunction> vertex_function;
-  id<MTLFunction> fragment_function;
-  id<MTLRenderPipelineState> pipeline_state;
-
-  MetalShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
-  ~MetalShader();
-
-  void useShader() override;
-};
-#endif
-
-#ifdef ENGINE_COMPILE_DIRECTX
-class DirectShader : public Shader {
-  private:
-    void load() override;
-    void unload() override;
-  public:
-    void useShader() override;
-    ID3D11InputLayout* inputLayout = nullptr;
-    DirectShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
-    ~DirectShader();
-};
-#endif
 
 }

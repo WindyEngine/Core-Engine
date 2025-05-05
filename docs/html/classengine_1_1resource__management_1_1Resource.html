@@ -106,6 +106,7 @@ $(function(){initNavTree('classengine_1_1resource__management_1_1Resource.html',
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classengine_1_1resource__management_1_1Resource-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">engine::resource_management::Resource Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
@@ -155,7 +156,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>propagateChan
 <tr class="memitem:a65084defea99004c3c068893ec8e6ef8" id="r_a65084defea99004c3c068893ec8e6ef8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65084defea99004c3c068893ec8e6ef8">addDependent</a> (std::shared_ptr&lt; <a class="el" href="classengine_1_1resource__management_1_1Resource.html">Resource</a> &gt; dep)</td></tr>
 <tr class="memdesc:a65084defea99004c3c068893ec8e6ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a resource as a dependent of this one.  <br /></td></tr>
 <tr class="separator:a65084defea99004c3c068893ec8e6ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34e92c5e31de6bcc607a2b5b1264aac7" id="r_a34e92c5e31de6bcc607a2b5b1264aac7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34e92c5e31de6bcc607a2b5b1264aac7">subscribe</a> (ResourceEvent event, std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classengine_1_1resource__management_1_1Resource.html">Resource</a> &gt;)&gt; callback)</td></tr>
+<tr class="memitem:a34e92c5e31de6bcc607a2b5b1264aac7" id="r_a34e92c5e31de6bcc607a2b5b1264aac7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34e92c5e31de6bcc607a2b5b1264aac7">subscribe</a> (<a class="el" href="resource_8hpp.html#a85b96fcc234f614ac7acb60aff4d3d39">ResourceEvent</a> event, std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classengine_1_1resource__management_1_1Resource.html">Resource</a> &gt;)&gt; callback)</td></tr>
 <tr class="memdesc:a34e92c5e31de6bcc607a2b5b1264aac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes a callback to a specific resource event.  <br /></td></tr>
 <tr class="separator:a34e92c5e31de6bcc607a2b5b1264aac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab29c968807940fdb36c80226682c8d99" id="r_ab29c968807940fdb36c80226682c8d99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab29c968807940fdb36c80226682c8d99">setHotReload</a> (bool state)</td></tr>
@@ -177,12 +178,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>hot_reload</b> = fals
 <tr class="memdesc:ab47735eca2501a118ab95a4d158b05d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the resource is hot-reloaded. <br /></td></tr>
 <tr class="separator:ab47735eca2501a118ab95a4d158b05d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:a702213f4e5d610fa6ef55fd3b5c597ba" id="r_a702213f4e5d610fa6ef55fd3b5c597ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a702213f4e5d610fa6ef55fd3b5c597ba">ResourceEventCallbackMap</a></td></tr>
+<tr class="memdesc:a702213f4e5d610fa6ef55fd3b5c597ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps resource events to a list of callback functions.  <br /></td></tr>
+<tr class="separator:a702213f4e5d610fa6ef55fd3b5c597ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a75a701a5ba1dcd78d372c256218b32bf" id="r_a75a701a5ba1dcd78d372c256218b32bf"><td class="memItemLeft" align="right" valign="top"><a id="a75a701a5ba1dcd78d372c256218b32bf" name="a75a701a5ba1dcd78d372c256218b32bf"></a>
-std::unordered_map&lt; ResourceEvent, std::vector&lt; std::function&lt; void(std::shared_ptr&lt; <a class="el" href="classengine_1_1resource__management_1_1Resource.html">Resource</a> &gt;)&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_subscribers</b></td></tr>
-<tr class="memdesc:a75a701a5ba1dcd78d372c256218b32bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event subscribers organized by event type. <br /></td></tr>
-<tr class="separator:a75a701a5ba1dcd78d372c256218b32bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40641c62786619bb0c6f4cd4477156c0" id="r_a40641c62786619bb0c6f4cd4477156c0"><td class="memItemLeft" align="right" valign="top"><a id="a40641c62786619bb0c6f4cd4477156c0" name="a40641c62786619bb0c6f4cd4477156c0"></a>
+<a class="el" href="#a702213f4e5d610fa6ef55fd3b5c597ba">ResourceEventCallbackMap</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_subscribers</b></td></tr>
+<tr class="memdesc:a40641c62786619bb0c6f4cd4477156c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event subscribers organized by event type. <br /></td></tr>
+<tr class="separator:a40641c62786619bb0c6f4cd4477156c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eb94e6d3c16be304b01341ac0f01548" id="r_a5eb94e6d3c16be304b01341ac0f01548"><td class="memItemLeft" align="right" valign="top"><a id="a5eb94e6d3c16be304b01341ac0f01548" name="a5eb94e6d3c16be304b01341ac0f01548"></a>
 std::vector&lt; std::weak_ptr&lt; <a class="el" href="classengine_1_1resource__management_1_1Resource.html">Resource</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_dependencies</b></td></tr>
 <tr class="memdesc:a5eb94e6d3c16be304b01341ac0f01548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resources this one depends on. <br /></td></tr>
@@ -199,7 +206,36 @@ std::unique_ptr&lt; filewatch::FileWatch&lt; std::string &gt; &gt;&#160;</td><td
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class representing a generic loadable resource. </p>
 <p>A <a class="el" href="classengine_1_1resource__management_1_1Resource.html" title="Abstract base class representing a generic loadable resource.">Resource</a> tracks its own loading state, file path, dependencies, and dependents. It supports event subscription for change propagation and must be subclassed to provide specific loading and unloading logic. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a702213f4e5d610fa6ef55fd3b5c597ba" name="a702213f4e5d610fa6ef55fd3b5c597ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a702213f4e5d610fa6ef55fd3b5c597ba">&#9670;&#160;</a></span>ResourceEventCallbackMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a702213f4e5d610fa6ef55fd3b5c597ba">engine::resource_management::Resource::ResourceEventCallbackMap</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"> std::unordered_map&lt;</div>
+<div class="line">    <a class="code hl_enumeration" href="resource_8hpp.html#a85b96fcc234f614ac7acb60aff4d3d39">ResourceEvent</a>,</div>
+<div class="line">    std::vector&lt;std::function&lt;void(std::shared_ptr&lt;Resource&gt;)&gt;&gt;&gt;</div>
+<div class="ttc" id="aresource_8hpp_html_a85b96fcc234f614ac7acb60aff4d3d39"><div class="ttname"><a href="resource_8hpp.html#a85b96fcc234f614ac7acb60aff4d3d39">engine::resource_management::ResourceEvent</a></div><div class="ttdeci">ResourceEvent</div><div class="ttdef"><b>Definition</b> resource.hpp:19</div></div>
+</div><!-- fragment -->
+<p>Maps resource events to a list of callback functions. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a49db9ff85243839cee43a9b1b2101669" name="a49db9ff85243839cee43a9b1b2101669"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49db9ff85243839cee43a9b1b2101669">&#9670;&#160;</a></span>Resource()</h2>
 
@@ -340,7 +376,7 @@ std::unique_ptr&lt; filewatch::FileWatch&lt; std::string &gt; &gt;&#160;</td><td
         <tr>
           <td class="memname">void Resource::subscribe </td>
           <td>(</td>
-          <td class="paramtype">ResourceEvent</td>          <td class="paramname"><span class="paramname"><em>event</em></span>, </td>
+          <td class="paramtype"><a class="el" href="resource_8hpp.html#a85b96fcc234f614ac7acb60aff4d3d39">ResourceEvent</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

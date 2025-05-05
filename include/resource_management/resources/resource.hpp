@@ -1,3 +1,4 @@
+/// @file resource.hpp
 #pragma once
 
 #include <ctime>
@@ -12,13 +13,11 @@
 namespace engine::resource_management {
 
 /**
+ * @enum engine::resource_management::ResourceEvent
  * @brief Types of events that a Resource can emit.
  */
 enum class ResourceEvent {
-  /**
-   * @brief Indicates the resource has changed (e.g., reloaded).
-   */
-  Change
+  Change /// Indicates the resource has changed (e.g., reloaded).
 };
 
 /**
@@ -31,9 +30,17 @@ enum class ResourceEvent {
 class Resource : public std::enable_shared_from_this<Resource> {
 protected:
   /**
+   * @typedef Resource::ResourceEventCallbackMap
+   * @brief Maps resource events to a list of callback functions.
+   */
+  using ResourceEventCallbackMap = std::unordered_map<
+    ResourceEvent,
+    std::vector<std::function<void(std::shared_ptr<Resource>)>>>;
+
+  /**
    * @brief Event subscribers organized by event type.
    */
-  std::unordered_map<ResourceEvent, std::vector<std::function<void(std::shared_ptr<Resource>)>>> _subscribers;
+  ResourceEventCallbackMap _subscribers;
   /**
    * @brief Resources this one depends on.
    */

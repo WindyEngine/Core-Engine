@@ -106,52 +106,53 @@ $(function(){initNavTree('resource__manager_8hpp_source.html',''); initResizable
   <div class="headertitle"><div class="title">resource_manager.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;resource_management/resources/shader.hpp&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;resource_management/resources/shader.hpp&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>engine::resource_management {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
-<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ResourceManager.html">   22</a></span><span class="keyword">class </span>ResourceManager {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keyword">static</span> std::shared_ptr&lt;ResourceManager&gt; _instance;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keyword">static</span> std::mutex _instanceMutex;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  std::mutex _loaderMutex;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  std::shared_mutex _cacheMutex;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  std::mutex _cleaningMutex;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  std::condition_variable _cleaningCv;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  std::unordered_map&lt;std::string, std::unique_ptr&lt;ResourceLoader&gt;&gt; _loaders;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::weak_ptr&lt;Resource&gt;&gt;&gt; _cache;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  std::thread _cleaningThread;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  std::atomic&lt;bool&gt; _isCleaning = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  ResourceManager();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ResourceManager.html#a3c8d4451c20672ec07bb656ef1311025">   82</a></span>  <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a3c8d4451c20672ec07bb656ef1311025">ResourceManager</a>(ResourceManager&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a671c186e4630599e7e36d000c53eaf80">~ResourceManager</a>();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keyword">static</span> std::shared_ptr&lt;ResourceManager&gt; <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#ae6ebf0e5582eaf2926a6ad830fb88180">Get</a>();</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a91be784296a3bad75e352011b5b2c140">registerLoader</a>(std::string extension, std::unique_ptr&lt;ResourceLoader&gt; loader);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  std::shared_ptr&lt;Resource&gt; <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a15c5fa23d5747a8aaac98444cf3129e8">load</a>(std::string path, <span class="keywordtype">bool</span> hot_reload = <span class="keyword">false</span>, <span class="keywordtype">bool</span> lazy = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a1c91f82b720ef7a9d127399628624545">cleanCache</a>(std::string extension);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#ae01f69818458b8019646dacdf734d814">cleanAllCache</a>();</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ResourceManager.html#a3819b225f8ab3bbf672d8fa53a2a7901">  133</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a3819b225f8ab3bbf672d8fa53a2a7901">operator=</a>(<span class="keyword">const</span> ResourceManager&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>};  </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>engine::resource_management {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ResourceManager.html">   23</a></span><span class="keyword">class </span>ResourceManager {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keyword">static</span> std::shared_ptr&lt;ResourceManager&gt; _instance;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keyword">static</span> std::mutex _instanceMutex;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  std::mutex _loaderMutex;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  std::shared_mutex _cacheMutex;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  std::mutex _cleaningMutex;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  std::condition_variable _cleaningCv;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  std::unordered_map&lt;std::string, std::unique_ptr&lt;ResourceLoader&gt;&gt; _loaders;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::weak_ptr&lt;Resource&gt;&gt;&gt; _cache;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  std::thread _cleaningThread;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  std::atomic&lt;bool&gt; _isCleaning = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  ResourceManager();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ResourceManager.html#a3c8d4451c20672ec07bb656ef1311025">   83</a></span>  <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a3c8d4451c20672ec07bb656ef1311025">ResourceManager</a>(ResourceManager&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a671c186e4630599e7e36d000c53eaf80">~ResourceManager</a>();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keyword">static</span> std::shared_ptr&lt;ResourceManager&gt; <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#ae6ebf0e5582eaf2926a6ad830fb88180">Get</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a91be784296a3bad75e352011b5b2c140">registerLoader</a>(std::string extension, std::unique_ptr&lt;ResourceLoader&gt; loader);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  std::shared_ptr&lt;Resource&gt; <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a15c5fa23d5747a8aaac98444cf3129e8">load</a>(std::string path, <span class="keywordtype">bool</span> hot_reload = <span class="keyword">false</span>, <span class="keywordtype">bool</span> lazy = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a1c91f82b720ef7a9d127399628624545">cleanCache</a>(std::string extension);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#ae01f69818458b8019646dacdf734d814">cleanAllCache</a>();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ResourceManager.html#a3819b225f8ab3bbf672d8fa53a2a7901">  134</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1ResourceManager.html#a3819b225f8ab3bbf672d8fa53a2a7901">operator=</a>(<span class="keyword">const</span> ResourceManager&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>};  </div>
 </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1ResourceManager_html_a15c5fa23d5747a8aaac98444cf3129e8"><div class="ttname"><a href="classengine_1_1resource__management_1_1ResourceManager.html#a15c5fa23d5747a8aaac98444cf3129e8">engine::resource_management::ResourceManager::load</a></div><div class="ttdeci">std::shared_ptr&lt; Resource &gt; load(std::string path, bool hot_reload=false, bool lazy=false)</div><div class="ttdoc">Loads a resource from a given path using the appropriate loader.</div><div class="ttdef"><b>Definition</b> resource_manager.cpp:56</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1ResourceManager_html_a1c91f82b720ef7a9d127399628624545"><div class="ttname"><a href="classengine_1_1resource__management_1_1ResourceManager.html#a1c91f82b720ef7a9d127399628624545">engine::resource_management::ResourceManager::cleanCache</a></div><div class="ttdeci">void cleanCache(std::string extension)</div><div class="ttdoc">Cleans up expired resources from the cache for a specific extension.</div><div class="ttdef"><b>Definition</b> resource_manager.cpp:95</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1ResourceManager_html_a3819b225f8ab3bbf672d8fa53a2a7901"><div class="ttname"><a href="classengine_1_1resource__management_1_1ResourceManager.html#a3819b225f8ab3bbf672d8fa53a2a7901">engine::resource_management::ResourceManager::operator=</a></div><div class="ttdeci">void operator=(const ResourceManager &amp;other)=delete</div><div class="ttdoc">Deleted assignment operator to enforce singleton behavior.</div></div>

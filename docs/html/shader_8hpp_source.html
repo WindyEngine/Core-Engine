@@ -106,39 +106,41 @@ $(function(){initNavTree('shader_8hpp_source.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">shader.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;resource_management/resources/resource.hpp&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>engine::resource_management {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1Shader.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classengine_1_1resource__management_1_1Shader.html">Shader</a> : <span class="keyword">public</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1Shader.html#a49db9ff85243839cee43a9b1b2101669">Resource</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keyword">using </span><a class="code hl_function" href="classengine_1_1resource__management_1_1Resource.html#a49db9ff85243839cee43a9b1b2101669">Resource::Resource</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1Shader.html#a081be89e103c7f7c62cc6174189ceb67">load</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1Shader.html#aa9986d1f63e4203de4c7b4fd4f09e05b">unload</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="resource_8hpp.html">resource_management/resources/resource.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>engine::resource_management {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1Shader.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classengine_1_1resource__management_1_1Shader.html">Shader</a> : <span class="keyword">public</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1Shader.html#a49db9ff85243839cee43a9b1b2101669">Resource</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">using </span><a class="code hl_function" href="classengine_1_1resource__management_1_1Resource.html#a49db9ff85243839cee43a9b1b2101669">Resource::Resource</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1Shader.html#a081be89e103c7f7c62cc6174189ceb67">load</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classengine_1_1resource__management_1_1Shader.html#aa9986d1f63e4203de4c7b4fd4f09e05b">unload</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
-<div class="foldopen" id="foldopen00041" data-start="{" data-end="};">
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ShaderLoader.html">   41</a></span><span class="keyword">class </span><a class="code hl_class" href="classengine_1_1resource__management_1_1ShaderLoader.html">ShaderLoader</a> : <span class="keyword">public</span> <a class="code hl_class" href="classengine_1_1resource__management_1_1ResourceLoader.html">ResourceLoader</a> {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  std::shared_ptr&lt;Resource&gt; <a class="code hl_function" href="classengine_1_1resource__management_1_1ShaderLoader.html#aa96b7b1d66646d08307e2619be3b2316">load</a>(std::string path, <span class="keywordtype">bool</span> lazy) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classengine_1_1resource__management_1_1ShaderLoader.html">   42</a></span><span class="keyword">class </span><a class="code hl_class" href="classengine_1_1resource__management_1_1ShaderLoader.html">ShaderLoader</a> : <span class="keyword">public</span> <a class="code hl_class" href="classengine_1_1resource__management_1_1ResourceLoader.html">ResourceLoader</a> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  std::shared_ptr&lt;Resource&gt; <a class="code hl_function" href="classengine_1_1resource__management_1_1ShaderLoader.html#aa96b7b1d66646d08307e2619be3b2316">load</a>(std::string path, <span class="keywordtype">bool</span> lazy) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
 </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
-<div class="ttc" id="aclassengine_1_1resource__management_1_1ResourceLoader_html"><div class="ttname"><a href="classengine_1_1resource__management_1_1ResourceLoader.html">engine::resource_management::ResourceLoader</a></div><div class="ttdoc">Abstract base class for resource loaders.</div><div class="ttdef"><b>Definition</b> resource.hpp:127</div></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+<div class="ttc" id="aclassengine_1_1resource__management_1_1ResourceLoader_html"><div class="ttname"><a href="classengine_1_1resource__management_1_1ResourceLoader.html">engine::resource_management::ResourceLoader</a></div><div class="ttdoc">Abstract base class for resource loaders.</div><div class="ttdef"><b>Definition</b> resource.hpp:134</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1Resource_html_a49db9ff85243839cee43a9b1b2101669"><div class="ttname"><a href="classengine_1_1resource__management_1_1Resource.html#a49db9ff85243839cee43a9b1b2101669">engine::resource_management::Resource::Resource</a></div><div class="ttdeci">Resource(std::string path)</div><div class="ttdoc">Constructs a Resource with the given file path.</div><div class="ttdef"><b>Definition</b> resource.cpp:9</div></div>
-<div class="ttc" id="aclassengine_1_1resource__management_1_1ShaderLoader_html"><div class="ttname"><a href="classengine_1_1resource__management_1_1ShaderLoader.html">engine::resource_management::ShaderLoader</a></div><div class="ttdoc">Resource loader for Shader objects.</div><div class="ttdef"><b>Definition</b> shader.hpp:41</div></div>
+<div class="ttc" id="aclassengine_1_1resource__management_1_1ShaderLoader_html"><div class="ttname"><a href="classengine_1_1resource__management_1_1ShaderLoader.html">engine::resource_management::ShaderLoader</a></div><div class="ttdoc">Resource loader for Shader objects.</div><div class="ttdef"><b>Definition</b> shader.hpp:42</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1ShaderLoader_html_aa96b7b1d66646d08307e2619be3b2316"><div class="ttname"><a href="classengine_1_1resource__management_1_1ShaderLoader.html#aa96b7b1d66646d08307e2619be3b2316">engine::resource_management::ShaderLoader::load</a></div><div class="ttdeci">std::shared_ptr&lt; Resource &gt; load(std::string path, bool lazy) override</div><div class="ttdoc">Loads a Shader resource from the specified path.</div><div class="ttdef"><b>Definition</b> shader.cpp:19</div></div>
-<div class="ttc" id="aclassengine_1_1resource__management_1_1Shader_html"><div class="ttname"><a href="classengine_1_1resource__management_1_1Shader.html">engine::resource_management::Shader</a></div><div class="ttdoc">Represents a GPU shader resource (e.g., vertex/fragment shader).</div><div class="ttdef"><b>Definition</b> shader.hpp:14</div></div>
+<div class="ttc" id="aclassengine_1_1resource__management_1_1Shader_html"><div class="ttname"><a href="classengine_1_1resource__management_1_1Shader.html">engine::resource_management::Shader</a></div><div class="ttdoc">Represents a GPU shader resource (e.g., vertex/fragment shader).</div><div class="ttdef"><b>Definition</b> shader.hpp:15</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1Shader_html_a081be89e103c7f7c62cc6174189ceb67"><div class="ttname"><a href="classengine_1_1resource__management_1_1Shader.html#a081be89e103c7f7c62cc6174189ceb67">engine::resource_management::Shader::load</a></div><div class="ttdeci">void load() override</div><div class="ttdoc">Loads the shader from its file.</div><div class="ttdef"><b>Definition</b> shader.cpp:7</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1Shader_html_a49db9ff85243839cee43a9b1b2101669"><div class="ttname"><a href="classengine_1_1resource__management_1_1Shader.html#a49db9ff85243839cee43a9b1b2101669">engine::resource_management::Shader::Resource</a></div><div class="ttdeci">Resource(std::string path)</div><div class="ttdoc">Inherit constructor from Resource.</div><div class="ttdef"><b>Definition</b> resource.cpp:9</div></div>
 <div class="ttc" id="aclassengine_1_1resource__management_1_1Shader_html_aa9986d1f63e4203de4c7b4fd4f09e05b"><div class="ttname"><a href="classengine_1_1resource__management_1_1Shader.html#aa9986d1f63e4203de4c7b4fd4f09e05b">engine::resource_management::Shader::unload</a></div><div class="ttdeci">void unload() override</div><div class="ttdoc">Unloads the shader and releases any GPU memory.</div><div class="ttdef"><b>Definition</b> shader.cpp:13</div></div>
+<div class="ttc" id="aresource_8hpp_html"><div class="ttname"><a href="resource_8hpp.html">resource.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

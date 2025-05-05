@@ -1,3 +1,4 @@
+/// @file resource.hpp
 #pragma once
 
 #include <atomic>

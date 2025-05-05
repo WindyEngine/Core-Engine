@@ -26,11 +26,11 @@ public:
    *
    * Typically compiles shader code and prepares GPU resources.
    */
-  void load() override;
+  bool load() override;
   /**
    * @brief Unloads the shader and releases any GPU memory.
    */
-  void unload() override;
+  bool unload() override;
 };
 
 /**

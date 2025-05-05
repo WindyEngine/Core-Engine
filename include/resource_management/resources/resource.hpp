@@ -84,11 +84,11 @@ public:
    *
    * Must be implemented by derived classes to perform actual loading.
    */
-  virtual void load() = 0;
+  virtual bool load() = 0;
   /**
    * @brief Unloads the resource and releases any held memory or GPU data.
    */
-  virtual void unload() = 0;
+  virtual bool unload() = 0;
   /**
    * @brief Reloads the resource, typically after external changes.
    */

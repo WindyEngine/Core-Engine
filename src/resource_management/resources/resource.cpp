@@ -28,8 +28,8 @@ void Resource::subscribe(ResourceEvent event, std::function<void(std::shared_ptr
 // Reloads the resource by unloading and loading it again,
 // then notifies all dependents and event subscribers.
 void Resource::reload() {
-  this->unload();
-  this->load();
+  if(!this->unload()) return;
+  if (!this->load()) return;
   this->propagateChange();
 }
 

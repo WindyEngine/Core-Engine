@@ -4,15 +4,19 @@
 using namespace engine::resource_management;
 
 // Loads the shader from file and marks it as loaded
-void Shader::load() {
+bool Shader::load() {
   std::cout << "Loading Shader: " << this->path << std::endl;
   this->loaded = true;
+
+  return true;
 }
 
 // Unloads the shader and marks it as not loaded
-void Shader::unload() {
+bool Shader::unload() {
   std::cout << "Unloading Shader: " << this->path << std::endl;
   this->loaded = false;
+
+  return true;
 }
 
 // Creates a new Shader resource, optionally loading it immediately

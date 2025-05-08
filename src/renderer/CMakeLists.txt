@@ -1,4 +1,4 @@
-file(GLOB SRC "*.cpp")
+file(GLOB_RECURSE SRC "*.cpp")
 
 add_library(renderer ${SRC})
 

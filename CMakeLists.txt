@@ -30,6 +30,7 @@ include_directories(
 # Globals
 set(METAL_LIBS "-framework Cocoa" "-framework QuartzCore" "-framework Metal")
 set(OPENGL_LIBS glfw glad)
+set(VULKAN_LIBS ${Vulkan_LIBRARIES})
 set(DIRECTX_LIBS ON)
 set(VULKAN_LIBS ${Vulkan_LIBRARIES})
 set(VULKAN_SDK $ENV{VULKAN_SDK})

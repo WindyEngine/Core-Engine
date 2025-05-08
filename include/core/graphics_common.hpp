@@ -16,7 +16,6 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
-#define GLFW_EXPOSE_NATIVE_WIN32
 #endif
 
 #ifdef ENGINE_COMPILE_METAL

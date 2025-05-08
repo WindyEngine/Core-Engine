@@ -19,12 +19,16 @@ include_directories(
   "include"
   "libs/headers"
   ${WIN_HEADERS}
+  ${Vulkan_INCLUDE_DIR}
+  "${VULKAN_SDK}/Include"
 )
 
 # Globals
 set(METAL_LIBS "-framework Cocoa" "-framework QuartzCore" "-framework Metal")
 set(OPENGL_LIBS glfw glad)
 set(DIRECTX_LIBS ON)
+set(VULKAN_LIBS ${Vulkan_LIBRARIES})
+
 
 # Definitions
 if (ENABLE_OPENGL)
@@ -34,6 +38,7 @@ endif()
 if (ENABLE_VULKAN)
   message("Compiling with Vulkan")
   add_definitions(-DENGINE_COMPILE_VULKAN)
+   find_package(Vulkan REQUIRED FATAL_ERROR)
 endif()
 if (ENABLE_DIRECTX)
   message("Compiling with DirectX")

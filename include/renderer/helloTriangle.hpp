@@ -1,6 +1,6 @@
 #pragma once
 
-#include <renderer/window.hpp>
+#include <platform/window.hpp>
 #include <resource_management/resource_manager.hpp>
 
 #ifdef ENGINE_COMPILE_OPENGL
@@ -8,7 +8,7 @@
 #endif
 
 using namespace engine::core;
-using namespace engine::rendering;
+using namespace engine::platform;
 using namespace engine::resource_management;
 
 #ifdef ENGINE_COMPILE_OPENGL

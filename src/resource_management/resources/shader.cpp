@@ -8,7 +8,7 @@
 #include <glad/glad.h>
 #endif
 
-using namespace engine::rendering;
+using namespace engine::platform;
 using namespace engine::resource_management;
 
 Shader::Shader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name, bool lazy) :

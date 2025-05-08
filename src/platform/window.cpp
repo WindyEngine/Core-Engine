@@ -1,8 +1,8 @@
-#include <renderer/window.hpp>
+#include <platform/window.hpp>
 #include <iostream>
 
 
-using namespace engine::rendering;
+using namespace engine::platform;
 
 #ifdef ENGINE_COMPILE_OPENGL
 OpenGLWindow::OpenGLWindow(int width, int height, const char* name) : _width(width), _height(height), _windowName(name) {}
@@ -80,23 +80,42 @@ bool VulkanWindow::shouldClose(){
 #ifdef ENGINE_COMPILE_DIRECTX
 ID3D11DeviceContext* DirectXWindow::context = nullptr;
 ID3D11Device* DirectXWindow::device = nullptr;
-DirectXWindow::DirectXWindow(int width, int height, const char* name) : _width(width), _height(height), _windowName(name) {}
+
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+    if(uMsg == WM_DESTROY){
+        PostQuitMessage(0);
+        return 0;
+    }
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+
+DirectXWindow::DirectXWindow(int width, int height, const char* name) : _width(width), _height(height), _windowName(name), _hwnd(nullptr) {
+    _hInstance = GetModuleHandle(nullptr);
+}
 
 DirectXWindow::~DirectXWindow(){
     DirectXWindow::context->Release();
     DirectXWindow::device->Release();
     renderTargetView->Release();
     swapChain->Release();
-    glfwDestroyWindow(_window);
-    glfwTerminate();
+    DestroyWindow(_hwnd);
 }
 
 void DirectXWindow::initWindow(){
-    glfwInit();
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    const char CLASS_NAME[] = "DXWindowClass";
 
-    _window = glfwCreateWindow(_width, _height, _windowName, nullptr, nullptr); //basic glfw window creation
-    HWND hwnd = glfwGetWin32Window(_window); //changes the glfw window to a win32 window to output dx onto it
+    WNDCLASS wc = {};
+    wc.lpfnWndProc = WindowProc;
+    wc.hInstance = _hInstance;
+    wc.lpszClassName = CLASS_NAME;
+    RegisterClassA(&wc);
+
+    _hwnd = CreateWindowEx(
+        0, CLASS_NAME, _windowName, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+        CW_USEDEFAULT, _width, _height, nullptr, nullptr, _hInstance, nullptr
+    );
+    ShowWindow(_hwnd, SW_SHOW);
     
     DXGI_SWAP_CHAIN_DESC scd = {}; //initializes the backbuffer with default values
     scd.BufferCount = 1; //creates 1 backbuffer that will drawn on and shown then switches back and forht
@@ -104,7 +123,7 @@ void DirectXWindow::initWindow(){
     scd.BufferDesc.Height = _height; //height of the backbuffer
     scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //color format for the window 8red 8green 8blue
     scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; //specifes where the buffer will be used
-    scd.OutputWindow = hwnd; //link to the output window duh
+    scd.OutputWindow = _hwnd; //link to the output window duh
     scd.SampleDesc.Count = 1; //uhhhh weird ass anti aliasing  stuff
     scd.Windowed = TRUE; //forces it to be windowed mode
     scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD; //discards after swap i think
@@ -124,7 +143,6 @@ void DirectXWindow::initWindow(){
 
 void DirectXWindow::clear(){
     context->OMSetRenderTargets(1, &renderTargetView, nullptr); //tells dx to actually draw on the RT
-
     float clearColor[] = {0.1f, 0.2f, 0.3f, 1.0f}; //the color format for the window (rgba) you can change it to whatever color
     context->ClearRenderTargetView(renderTargetView, clearColor); //clears the backbuffer which is now the RTV to the clearColor format (blue atm)
 
@@ -140,8 +158,6 @@ void DirectXWindow::clear(){
 }
 
 void DirectXWindow::show(){
-    glfwPollEvents();
-
     swapChain->Present(1,0); //presents the backbuffer after its "drawn" on
 }
 
@@ -150,6 +166,12 @@ float DirectXWindow::update(){
 }
 
 bool DirectXWindow::shouldClose(){
-    return glfwWindowShouldClose(_window);
+    MSG msg = {};
+    while(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+        if(msg.message == WM_QUIT) return true;
+    }
+    return false;
 }
 #endif

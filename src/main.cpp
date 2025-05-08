@@ -1,8 +1,9 @@
 //#include <core/types.hpp>
 #include <core/graphics_common.hpp>
-//#include <renderer/window.hpp>
+#include <platform/window.hpp>
 //#include <resource_management/resource_manager.hpp>
-//#include <renderer/helloTriangle.hpp>
+#include <renderer/helloTriangle.hpp>
+#include <iostream>
 
 //using namespace engine;
 //using namespace engine::rendering;
@@ -22,7 +23,7 @@ int main() {
 /*#ifdef ENGINE_COMPILE_DIRECTX
     std::cout << "Initializing DX window..." << std::endl;
 
-    openGLTriangle();
+    DirectXTriangle();
 
     std::cout << "Window closed successfully." << std::endl;
 #endif*/

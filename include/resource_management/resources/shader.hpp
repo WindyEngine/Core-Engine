@@ -3,7 +3,7 @@
 #include <memory>
 #include <resource_management/resources/resource.hpp>
 #include <resource_management/resources/file.hpp>
-#include <renderer/window.hpp>
+#include <platform/window.hpp>
 
 namespace engine::resource_management {
 

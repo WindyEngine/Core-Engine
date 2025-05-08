@@ -2,7 +2,7 @@
 
 #include <core/graphics_common.hpp>
 
-namespace engine::rendering {
+namespace engine::platform {
 
     class Window {
         public:
@@ -76,12 +76,13 @@ namespace engine::rendering {
 #ifdef ENGINE_COMPILE_DIRECTX
     class DirectXWindow : public Window {
         public:
+            DirectXWindow(int width, int height, const char* name);
+            ~DirectXWindow() override;
+
             IDXGISwapChain* swapChain = nullptr;
             static ID3D11DeviceContext* context;
             static ID3D11Device* device;
             ID3D11RenderTargetView* renderTargetView = nullptr;
-            DirectXWindow(int width, int height, const char* name);
-            ~DirectXWindow() override;
 
             void initWindow() override;
             bool shouldClose() override;
@@ -93,7 +94,9 @@ namespace engine::rendering {
             int _width;
             int _height;
             const char* _windowName;
-            GLFWwindow* _window;
+
+            HWND _hwnd;
+            HINSTANCE _hInstance;
     };
 #endif
 }

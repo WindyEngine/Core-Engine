@@ -5,9 +5,13 @@ project(graphics)
 # Options
 option(ENABLE_CLANGD "Export Compile Command" OFF)
 option(ENABLE_OPENGL "Enable OpenGL backend" ON)
+set(ENABLE_OPENGL ${ENABLE_OPENGL} CACHE BOOL "Enable OpenGL support") 
 option(ENABLE_VULKAN "Enable Vulkan backend" ON)
+set(ENABLE_VULKAN ${ENABLE_VULKAN} CACHE BOOL "Enable Vulkan support")
 option(ENABLE_DIRECTX "Enable DirectX backend" OFF)
+set(ENABLE_DIRECTX ${ENABLE_DIRECTX} CACHE BOOL "Enable DirectX support") 
 option(ENABLE_METAL "Enable Metal backend" ON)
+set(ENABLE_METAL ${ENABLE_METAL} CACHE BOOL "Enable Metal support")
 
 # Settings
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -28,6 +32,7 @@ set(METAL_LIBS "-framework Cocoa" "-framework QuartzCore" "-framework Metal")
 set(OPENGL_LIBS glfw glad)
 set(DIRECTX_LIBS ON)
 set(VULKAN_LIBS ${Vulkan_LIBRARIES})
+set(VULKAN_SDK $ENV{VULKAN_SDK})
 
 
 # Definitions
@@ -38,7 +43,6 @@ endif()
 if (ENABLE_VULKAN)
   message("Compiling with Vulkan")
   add_definitions(-DENGINE_COMPILE_VULKAN)
-   find_package(Vulkan REQUIRED FATAL_ERROR)
 endif()
 if (ENABLE_DIRECTX)
   message("Compiling with DirectX")

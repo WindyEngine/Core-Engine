@@ -54,6 +54,10 @@ if (ENABLE_METAL)
   add_definitions(-DENGINE_COMPILE_METAL)
 endif()
 
+# Templates
+file(COPY ${CMAKE_SOURCE_DIR}/templates DESTINATION ${CMAKE_BINARY_DIR})
+add_compile_definitions(TEMPLATES_PATH="${CMAKE_BINARY_DIR}/templates")
+
 # Main Binary
 add_subdirectory(libs)
 add_subdirectory(src)

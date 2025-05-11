@@ -1,40 +1,89 @@
+#include <ios>
 #include <iostream>
+#include <json/json.hpp>
+#include <filesystem>
+#include <fstream>
 #include <resource_management/resources/shader.hpp>
+#include <resource_management/file.hpp>
+#include <string>
 
 using namespace engine::resource_management;
 
-// Loads the shader from file and marks it as loaded
-bool Shader::load() {
-  std::cout << "Loading Shader: " << this->path << std::endl;
-  this->loaded = true;
+Shader::~Shader() {
+  ResourceHandle<Shader> temp(this, [](Shader* ptr){});
+  this->unload();
+}
 
+std::string Shader::getSourceCode() {
+  return this->_sourceCode;
+}
+
+bool Shader::load(bool initial) {
+  if (this->_loaded) return false;
+
+  std::cout << "Loading: " << this->_path << std::endl;
+  this->_sourceCode = readFile(this->_path);
+
+  this->_loaded = true;
+  if (initial) this->emit(ResourceEvent::Load);
   return true;
 }
 
-// Unloads the shader and marks it as not loaded
-bool Shader::unload() {
-  std::cout << "Unloading Shader: " << this->path << std::endl;
-  this->loaded = false;
+bool Shader::unload(bool final) {
+  if (!this->_loaded) return false;
+  if (final) this->emit(ResourceEvent::Unload);
 
+  std::cout << "Unloading: " << this->_path << std::endl;
+
+  this->_loaded = false;
   return true;
 }
 
-// Creates a new Shader resource, optionally loading it immediately
-std::shared_ptr<Resource> ShaderLoader::load(std::string path, bool lazy) {
-  // Create a raw Shader pointer
-  Shader* raw = new Shader(path);
+void Shader::save() {
+  std::ofstream metaFile(std::filesystem::path(this->_path).replace_extension(".meta").string());
+  if (!metaFile) return;
 
-  // Wrap the raw pointer in a shared_ptr with a custom deleter
-  // that ensures the shader is properly unloaded before deletion
-  std::shared_ptr<Shader> shader(raw, [](Shader* ptr) {
-    if (!ptr || !ptr->loaded) return;
+  nlohmann::json metadata;
+  metadata["type"] = "shader";
+  metadata["sourceFile"] = this->_path;
 
-    ptr->unload();
-    delete ptr;
-  });
+  metaFile << metadata.dump(2);
+}
 
-  // If not lazy, load the shader immediately
+ResourceHandle<Resource> ShaderLoader::load(std::string path, bool lazy) {
+  if (!std::filesystem::exists(path + ".meta")) this->create(path);
+
+  std::ifstream metaFile(path + ".meta");
+  if (!metaFile) return nullptr;
+
+  nlohmann::json metadata;
+  metaFile >> metadata;
+
+  if (metadata["type"] != "shader") return nullptr;
+
+  Shader* rawPointer = new Shader(metadata["sourceFile"]);
+  ResourceHandle<Shader> shader = std::shared_ptr<Shader>(rawPointer); 
+
   if (!lazy) shader->load();
 
   return shader;
+}
+
+void ShaderLoader::create(std::string filePath) {
+  std::filesystem::create_directories(std::filesystem::path(filePath).parent_path());
+
+  std::ofstream metaFile(filePath + ".meta", std::ios::trunc);
+  if (!metaFile) return;
+
+  nlohmann::json metadata;
+  metadata["sourceFile"] = std::filesystem::path(filePath).filename().string() + ".shader";
+  metadata["type"] = "shader";
+
+  metaFile << metadata.dump(2);
+
+  std::ofstream sourceFile(filePath + ".shader");
+#ifdef TEMPLATES_PATH
+  std::ifstream defaultSource(std::string(TEMPLATES_PATH) + "/default.shader");
+  sourceFile<< defaultSource.rdbuf();
+#endif
 }

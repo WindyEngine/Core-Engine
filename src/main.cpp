@@ -1,13 +1,20 @@
 #include <resource_management/resource_manager.hpp>
+#include <CLI11/CLI11.hpp>
 
 
 using namespace engine::resource_management;
 
-int main() {
-  auto rm = ResourceManager::Get();
-  rm->registerLoader(".vert", std::make_unique<ShaderLoader>());
-  
-  auto shader = std::dynamic_pointer_cast<Shader>(rm->load("/home/Zenjar/Documents/projects/graphics_assets/shader.vert"));
+int main(int argc, char**argv) {
+  // CLI Logic
+  CLI::App cli;
+  argv = cli.ensure_utf8(argv);
+  std::string assetPath;
+  cli.add_option("-p, --project", assetPath, "Path to Project Folder")->required();
+  CLI11_PARSE(cli, argc, argv);
+
+  auto rm = ResourceManager::Get(assetPath + "/assets");
+  rm->registerLoader<Shader>(std::make_unique<ShaderLoader>());
+  ResourceHandle<Shader> shader = rm->load<Shader>("shaders/myShader");
 
   return 0;
 }

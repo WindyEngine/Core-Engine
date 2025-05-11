@@ -61,7 +61,7 @@ ResourceHandle<Resource> ShaderLoader::load(std::string path, bool lazy) {
 
   if (metadata["type"] != "shader") return nullptr;
 
-  Shader* rawPointer = new Shader(std::filesystem::path(path).parent_path() / metadata["sourceFile"]);
+  Shader* rawPointer = new Shader((std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
   ResourceHandle<Shader> shader = std::shared_ptr<Shader>(rawPointer); 
 
   if (!lazy) shader->load();

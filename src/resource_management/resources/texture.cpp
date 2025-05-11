@@ -55,7 +55,7 @@ ResourceHandle<Resource> TextureLoader::load(std::string path, bool lazy) {
 
   if (metadata["type"] != "texture") return nullptr;
 
-  Texture* rawPointer = new Texture(std::filesystem::path(path).parent_path() / metadata["sourceFile"]);
+  Texture* rawPointer = new Texture((std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
   ResourceHandle<Texture> texture = std::shared_ptr<Texture>(rawPointer);
 
   if (!lazy) texture->load();

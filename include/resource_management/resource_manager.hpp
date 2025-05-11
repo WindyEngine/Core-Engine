@@ -12,6 +12,7 @@
 #include <typeindex>
 #include <unordered_map>
 #include <resource_management/resources/shader.hpp>
+#include <resource_management/resources/texture.hpp>
 
 
 namespace engine::resource_management {

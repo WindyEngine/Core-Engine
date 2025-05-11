@@ -14,7 +14,9 @@ int main(int argc, char**argv) {
 
   auto rm = ResourceManager::Get(assetPath + "/assets");
   rm->registerLoader<Shader>(std::make_unique<ShaderLoader>());
+  rm->registerLoader<Texture>(std::make_unique<TextureLoader>());
   ResourceHandle<Shader> shader = rm->load<Shader>("shaders/myShader");
+  ResourceHandle<Texture> texture = rm->load<Texture>("textures/myTexture");
 
   return 0;
 }

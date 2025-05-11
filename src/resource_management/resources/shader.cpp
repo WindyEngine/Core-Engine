@@ -40,12 +40,12 @@ bool Shader::unload() {
 }
 
 void Shader::save() {
-  std::ofstream metaFile(std::filesystem::path(this->_path).replace_extension(".meta").string());
+  std::ofstream metaFile(std::filesystem::path(this->_path).replace_extension(".meta"));
   if (!metaFile) return;
 
   nlohmann::json metadata;
   metadata["type"] = "shader";
-  metadata["sourceFile"] = this->_path;
+  metadata["sourceFile"] = std::filesystem::path(this->_path).filename().string();
 
   metaFile << metadata.dump(2);
 }
@@ -61,7 +61,7 @@ ResourceHandle<Resource> ShaderLoader::load(std::string path, bool lazy) {
 
   if (metadata["type"] != "shader") return nullptr;
 
-  Shader* rawPointer = new Shader(metadata["sourceFile"]);
+  Shader* rawPointer = new Shader(std::filesystem::path(path).parent_path() / metadata["sourceFile"]);
   ResourceHandle<Shader> shader = std::shared_ptr<Shader>(rawPointer); 
 
   if (!lazy) shader->load();

@@ -18,20 +18,20 @@ std::string Shader::getSourceCode() {
   return this->_sourceCode;
 }
 
-bool Shader::load(bool initial) {
+bool Shader::load() {
   if (this->_loaded) return false;
 
   std::cout << "Loading: " << this->_path << std::endl;
   this->_sourceCode = readFile(this->_path);
 
   this->_loaded = true;
-  if (initial) this->emit(ResourceEvent::Load);
+  this->emit(ResourceEvent::Load);
   return true;
 }
 
-bool Shader::unload(bool final) {
+bool Shader::unload() {
   if (!this->_loaded) return false;
-  if (final) this->emit(ResourceEvent::Unload);
+  this->emit(ResourceEvent::Unload);
 
   std::cout << "Unloading: " << this->_path << std::endl;
 

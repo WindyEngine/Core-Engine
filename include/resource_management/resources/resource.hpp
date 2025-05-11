@@ -56,8 +56,8 @@ public:
   Resource(std::string path);
   virtual ~Resource() = default;
 
-  virtual bool load(bool initial = true) = 0;
-  virtual bool unload(bool final = true) = 0;
+  virtual bool load() = 0;
+  virtual bool unload() = 0;
   virtual void reload();
   virtual void save() = 0;
   virtual void propagateChange();

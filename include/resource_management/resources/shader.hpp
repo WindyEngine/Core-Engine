@@ -16,8 +16,8 @@ public:
 
   std::string getSourceCode();
 
-  bool load(bool initial = true) override;
-  bool unload(bool final = true) override;
+  bool load() override;
+  bool unload() override;
   void save() override;
 };
 

@@ -36,8 +36,8 @@ void Resource::subscribe(ResourceEvent event, std::function<void(ResourceEvent, 
 
 void Resource::reload() {
   if (!this->_loaded) return;
-  if(!this->unload(false)) return;
-  if (!this->load(false)) return;
+  if(!this->unload()) return;
+  if (!this->load()) return;
 
   this->propagateChange();
 

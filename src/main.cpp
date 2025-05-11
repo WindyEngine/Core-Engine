@@ -20,13 +20,15 @@ int main() {
   //std::cout << "\nEnd Testing\n" << std::endl;
 
 
-/*#ifdef ENGINE_COMPILE_DIRECTX
+#ifdef ENGINE_COMPILE_VULKAN
     std::cout << "Initializing DX window..." << std::endl;
 
-    DirectXTriangle();
+    VulkanTriangle();
+
+    //DirectXTriangle();
 
     std::cout << "Window closed successfully." << std::endl;
-#endif*/
+#endif
 
   return 0;
 }

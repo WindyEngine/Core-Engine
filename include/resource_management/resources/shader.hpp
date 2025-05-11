@@ -51,9 +51,16 @@ private:
   void load() override;
   void unload() override;
 
+  VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
+  VkRenderPass renderPass = VK_NULL_HANDLE;
+  VkCommandPool commandPool = VK_NULL_HANDLE;
+  static uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
+
+
 public:
   VulkanShader(std::shared_ptr<File> vertex, std::shared_ptr<File> fragment, std::string name = "", bool lazy = true);
   ~VulkanShader();
+  void useShader() override;
 };
 #endif
 

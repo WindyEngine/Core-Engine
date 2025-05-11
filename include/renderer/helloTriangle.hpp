@@ -56,6 +56,25 @@ void openGLTriangle() {
 }
 #endif
 
+#ifdef ENGINE_COMPILE_VULKAN
+void VulkanTriangle(){
+    VulkanWindow window(800, 600, "Vulkan Window");
+    window.initWindow();
+
+    ResourceManager::config.hot_reload = true;
+    ResourceManager::setGraphicsLoader(GraphicsAPI::Vulkan);
+
+    std::shared_ptr<Shader> shader = ResourceManager::loadShader("C:/Users/Sajed/Desktop/GraphicsEngine/Shaders/shader.vert.spv", "C:/Users/Sajed/Desktop/GraphicsEngine/Shaders/shader.frag.spv"); 
+    shader->useShader();
+    
+    while (!window.shouldClose()) {
+        glfwPollEvents();
+        window.clear();
+        window.show();  
+    }
+}
+#endif
+
 #ifdef ENGINE_COMPILE_DIRECTX
 void DirectXTriangle(){
     struct vertex {

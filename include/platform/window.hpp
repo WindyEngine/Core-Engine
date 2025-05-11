@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core/graphics_common.hpp>
+#include <vector>
 
 namespace engine::platform {
 
@@ -44,11 +45,37 @@ namespace engine::platform {
             void initWindow() override;
             bool shouldClose() override;
             float update() override;
+            void clear() override;
+            void show() override;
+
+            static VkDevice device;
+            static VkExtent2D swapChainExtent;
+            static VkPhysicalDevice physicalDevice;
+            static VkCommandBuffer commandBuffer;
+            static VkPipeline graphicsPipeline;
+            static uint32_t graphicsQueueFamilyIndex;
+            static VkBuffer vertexBuffer;
+            static VkDeviceMemory vertexBufferMemory;
+            static VkRenderPass renderPass;
 
         private:
             GLFWwindow* _window;
             int _width, _height;
             const char* _windowName;
+            VkInstance instance;
+            VkSurfaceKHR surface;
+            VkSwapchainKHR swapchain;
+            VkQueue graphicsQueue;
+            VkDeviceSize bufferSize;
+            VkSemaphore imageAvailableSemaphore;
+            VkSemaphore renderFinishedSemaphore;
+            VkFence inFlightFence;
+            VkCommandPool commandPool;
+
+            std::vector<VkFramebuffer> swapChainFramebuffers;
+            std::vector<VkImageView> swapChainImageViews;
+
+            uint32_t imageIndex = 0; 
     };
 #endif
 

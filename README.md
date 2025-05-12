@@ -4,6 +4,7 @@
 ### Windows
 - CMake
 - Visual Studio
+- Vulkan SDK
 ### Linux
 - CMake
 - Vulkan SDK

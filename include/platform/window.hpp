@@ -109,6 +109,7 @@ namespace engine::platform {
             IDXGISwapChain* swapChain = nullptr;
             static ID3D11DeviceContext* context;
             static ID3D11Device* device;
+            static ID3D11InputLayout* inputLayout;
             ID3D11RenderTargetView* renderTargetView = nullptr;
 
             void initWindow() override;

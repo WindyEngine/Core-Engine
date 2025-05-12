@@ -62,6 +62,10 @@ uint32_t VulkanWindow::graphicsQueueFamilyIndex = 0;
 VkBuffer VulkanWindow::vertexBuffer = VK_NULL_HANDLE;
 VkDeviceMemory VulkanWindow::vertexBufferMemory = VK_NULL_HANDLE; 
 VkRenderPass VulkanWindow::renderPass = VK_NULL_HANDLE;
+VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
+VkRenderPass renderPass = VK_NULL_HANDLE;
+VkCommandPool commandPool = VK_NULL_HANDLE;
+static uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
 VulkanWindow::VulkanWindow(int width, int height, const char* name) : _width(width), _height(height), _windowName(name) {}
 
@@ -462,6 +466,7 @@ bool VulkanWindow::shouldClose(){
 #ifdef ENGINE_COMPILE_DIRECTX
 ID3D11DeviceContext* DirectXWindow::context = nullptr;
 ID3D11Device* DirectXWindow::device = nullptr;
+ID3D11InputLayout* DirectXWindow::inputLayout = nullptr;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
     if(uMsg == WM_DESTROY){

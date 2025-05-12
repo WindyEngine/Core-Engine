@@ -1,9 +1,12 @@
 #include <resource_management/resource_manager.hpp>
 #include <CLI11/CLI11.hpp>
+#include <renderer/helloTriangle.hpp>
 
 
 using namespace engine::resource_management;
 
+
+#ifdef ENGINE_COMPILE_VULKAN
 int main(int argc, char**argv) {
   // CLI Logic
   CLI::App cli;
@@ -18,5 +21,9 @@ int main(int argc, char**argv) {
 
   std::cout << shader->getSourceCode();
 
+  //VulkanTriangle();
+  //DirectXTriangle();
+  
   return 0;
 }
+#endif

@@ -2,7 +2,7 @@
 
 #ifdef __OBJC__
 #import <Cocoa/Cocoa.h>
-#import <QuartzCore/CAMetalLayer.h>
+#import <QuartzCore/CAMetalLayer.h>  // Ensure this is imported
 #else
 typedef void NSWindow;
 typedef void CAMetalLayer;
@@ -10,6 +10,7 @@ typedef void CAMetalLayer;
 
 #include <Metal/Metal.h>
 #include <string>
+#include "metal_renderer.hpp"
 
 class MetalWindow {
 public:
@@ -17,21 +18,24 @@ public:
     ~MetalWindow();
     
     void initWindow();
-    void loadShader(const std::string& source);
-    void useShader(id<MTLRenderCommandEncoder> encoder);
     void clear();
     bool shouldClose();
-    float update();
+    void update();
     void present();
     void resize(int width, int height);
     
+    CAMetalLayer* getLayer();  // Returns the CAMetalLayer object
+    id<MTLDevice> getDevice();  // Returns the Metal device
+    id<CAMetalDrawable> getDrawable();  // Returns the Metal drawable
+    
 private:
-    NSWindow* window;                       // Pointer to the NSWindow instance (Objective-C)
-    id<MTLDevice> device;                   // Metal device for rendering
-    id<MTLCommandQueue> commandQueue;       // Command queue for Metal commands
-    CAMetalLayer* metalLayer;               // Metal layer for the window's content
-    id<CAMetalDrawable> currentDrawable;    // Drawable for presenting Metal content
+    NSWindow* window;  // Window pointer
+    id<MTLDevice> device;  // Metal device pointer
+    id<MTLCommandQueue> commandQueue;  // Command queue
+    CAMetalLayer* metalLayer;  // Metal layer
+    id<CAMetalDrawable> currentDrawable;  // Current drawable object
+    MetalRenderer* renderer;  // Renderer for drawing
 
-    void setupMetal();                      // Setup the Metal device and resources
-    void createWindow(int width, int height, const char* title);  // Create a macOS window
+    void setupMetal();  // Setup Metal context
+    void createWindow(int width, int height, const char* title);  // Create the window
 };

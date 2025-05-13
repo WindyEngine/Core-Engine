@@ -8,11 +8,17 @@ int main() {
         // Create the MetalWindow object correctly
         MetalWindow* window = new MetalWindow(800, 600, "Metal Game Engine");
 
+        // Print that the app is running
+        NSLog(@"Metal Game Engine is running...");
+
         // Main loop
         while (!window->shouldClose()) {
-            window->clear();
-            window->update();
+            window->clear();  // Clear the screen before rendering
+            window->update(); // Update events and rendering
         }
+
+        // Print that the app is closed
+        NSLog(@"Metal Game Engine has been closed.");
 
         // Clean up
         delete window;

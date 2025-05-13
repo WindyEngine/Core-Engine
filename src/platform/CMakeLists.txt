@@ -11,6 +11,8 @@ if(ENABLE_OPENGL)
 endif()
 if(ENABLE_VULKAN)
   if(WIN32)
+    
+    link_directories(platform "${VULKAN_SDK}/Lib")
     target_link_libraries(platform "${VULKAN_SDK}/Lib/vulkan-1.lib")
   elseif(UNIX)
     target_link_libraries(platform vulkan)

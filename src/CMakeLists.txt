@@ -1,5 +1,5 @@
 add_subdirectory(resource_management)
-#add_subdirectory(renderer)
+add_subdirectory(renderer)
 add_subdirectory(platform)
 
 add_executable(graphics main.cpp)
@@ -16,7 +16,7 @@ elseif(ENABLE_DIRECTX)
   target_sources(graphics ${DIRECTX_LIBS})
 endif()
 
-target_link_libraries(graphics resource_management platform)
+target_link_libraries(graphics renderer resource_management platform)
 
 add_custom_command(
     TARGET graphics POST_BUILD

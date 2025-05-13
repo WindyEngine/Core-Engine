@@ -38,7 +38,12 @@ if (NOT METAL_FRAMEWORK)
 endif()
 
 # Add the executable
-add_executable(MetalApp ${SOURCES})
+add_executable(MetalApp
+    main.mm
+    renderer/metal_renderer.mm
+    platform/metal_window.mm
+    platform/MetalView.mm
+)
 
 # Link required frameworks
 target_link_libraries(MetalApp
@@ -49,10 +54,10 @@ target_link_libraries(MetalApp
 
 # Set additional include directories
 target_include_directories(MetalApp PRIVATE
-    ${CMAKE_SOURCE_DIR}  # Current project directory
-    /System/Library/Frameworks/QuartzCore.framework/Headers  # Add system framework headers
-    /System/Library/Frameworks/Metal.framework/Headers
+    renderer
+    platform
 )
+
 
 # If you need to use the Metal framework's lib (though it is usually automatically linked)
 target_link_libraries(MetalApp

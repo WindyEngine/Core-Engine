@@ -1,7 +1,5 @@
 #include <platform/window.hpp>
 #include <iostream>
-#include <vector>
-#include <resource_management/resources/shader.hpp>
 
 using namespace engine::platform;
 

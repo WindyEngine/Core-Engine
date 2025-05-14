@@ -18,7 +18,7 @@ public:
 
 class TextureLoader : public ResourceLoader {
 public:
-  ResourceHandle<Resource> load(std::string path, bool lazy) override;
+  ResourceHandle<Resource> load(std::string name, std::string path, bool lazy) override;
   void create(std::string path) override;
 };
 

@@ -3,6 +3,7 @@
 
 #include "resource_management/resources/resource.hpp"
 #include <atomic>
+#include <complex>
 #include <condition_variable>
 #include <filesystem>
 #include <memory>
@@ -11,7 +12,7 @@
 #include <thread>
 #include <typeindex>
 #include <unordered_map>
-#include <resource_management/resources/shader.hpp>
+#include <resource_management/resources/shader/shader.hpp>
 #include <resource_management/resources/texture.hpp>
 
 
@@ -47,9 +48,13 @@ public:
     this->_loaders[typeid(T)] = std::move(loader);
   }
   template<typename T>
-  ResourceHandle<T> load(std::string path, bool hot_reload = false, bool lazy = false) {
+  ResourceHandle<T> load(std::string path, std::string name = "", bool hot_reload = false, bool lazy = false) {
     std::filesystem::path fullPath(_assetPath + "/" + path);
     std::string normalizedPath = std::filesystem::absolute(fullPath).lexically_normal().string();
+
+    if (name.empty()) {
+      name = std::filesystem::path(normalizedPath).filename().replace_extension().string();
+    }
 
     {
       std::shared_lock<std::shared_mutex> readLock(this->_cacheMutex);
@@ -71,7 +76,7 @@ public:
     auto loaderIt = this->_loaders.find(typeid(T));
     if (loaderIt == this->_loaders.end()) return nullptr;
 
-    ResourceHandle<Resource> resource = loaderIt->second->load(normalizedPath, lazy);
+    ResourceHandle<Resource> resource = loaderIt->second->load(name, normalizedPath, lazy);
     resource->setHotReload(hot_reload);
     loaderLock.unlock();
 

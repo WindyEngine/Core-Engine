@@ -19,7 +19,7 @@ int main(int argc, char**argv) {
   rm->registerLoader<Shader>(std::make_unique<ShaderLoader>());
   ResourceHandle<Shader> shader = rm->load<Shader>("shaders/myShader");
 
-  std::cout << shader->getSourceCode();
+  std::cout << shader->getHLSL("computeMain");
 
   //VulkanTriangle();
   //DirectXTriangle();

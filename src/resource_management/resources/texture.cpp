@@ -43,7 +43,7 @@ void Texture::save() {
   metaFile << metadata.dump(2);
 }
 
-ResourceHandle<Resource> TextureLoader::load(std::string path, bool lazy) {
+ResourceHandle<Resource> TextureLoader::load(std::string name, std::string path, bool lazy) {
   std::cout << "Test" << std::endl;
   if  (!std::filesystem::exists(path + ".meta")) this->create(path);
   
@@ -55,7 +55,7 @@ ResourceHandle<Resource> TextureLoader::load(std::string path, bool lazy) {
 
   if (metadata["type"] != "texture") return nullptr;
 
-  Texture* rawPointer = new Texture((std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
+  Texture* rawPointer = new Texture(name, (std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
   ResourceHandle<Texture> texture = std::shared_ptr<Texture>(rawPointer);
 
   if (!lazy) texture->load();

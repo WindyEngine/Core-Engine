@@ -1,14 +1,12 @@
 #pragma once
 
 #include <cstdint>
+
 #include <resource_management/resources/resource.hpp>
-#include <mutex>
-#include <unordered_map>
-#include <memory>
+
 #include <slang/slang.h>
 #include <slang/slang-com-ptr.h>
 #include <slang/slang-com-helper.h>
-#include <vector>
 
 
 namespace engine::resource_management {

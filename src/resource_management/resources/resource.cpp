@@ -67,7 +67,7 @@ void Resource::setHotReload(bool state) {
         auto now = std::chrono::steady_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_lastReload);
 
-        if (duration.count() < 500) return;
+        if (duration.count() < 2000) return;
         this->_lastReload = now;
 
         this->reload();

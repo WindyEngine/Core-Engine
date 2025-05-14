@@ -1,7 +1,7 @@
 #include <chrono>
-#include <mutex>
+
 #include <resource_management/resource_manager.hpp>
-#include <typeindex>
+
 
 using namespace engine::resource_management;
 

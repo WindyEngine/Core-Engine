@@ -1,17 +1,13 @@
 /// @file resource_manager.hpp
 #pragma once
 
-#include "resource_management/resources/resource.hpp"
 #include <atomic>
-#include <complex>
 #include <condition_variable>
 #include <filesystem>
-#include <memory>
-#include <mutex>
 #include <shared_mutex>
 #include <thread>
 #include <typeindex>
-#include <unordered_map>
+
 #include <resource_management/resources/shader/shader.hpp>
 #include <resource_management/resources/texture.hpp>
 

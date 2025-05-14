@@ -1,12 +1,9 @@
 #include <ios>
-#include <iostream>
-#include <json/json.hpp>
-#include <filesystem>
-#include <fstream>
-#include <memory>
+
 #include <resource_management/resources/shader/shader.hpp>
 #include <resource_management/file.hpp>
-#include <string>
+
+#include <json/json.hpp>
 #include <slang/slang.h>
 
 

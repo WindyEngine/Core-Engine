@@ -1,7 +1,6 @@
 /// @file resource.hpp
 #pragma once
 
-#include <cstdint>
 #include <resource_management/resources/shader/shader_compiler.hpp>
 
 

@@ -1,11 +1,6 @@
-#include <cstdint>
-#include <slang/slang-com-ptr.h>
-#include <slang/slang.h>
-#include <resource_management/resources/shader/shader_compiler.hpp>
-#include <resource_management/resources/shader/shader.hpp>
 #include <filesystem>
-#include <string>
-#include <vector>
+
+#include <resource_management/resources/shader/shader.hpp>
 
 
 using namespace engine::resource_management;

@@ -1,8 +1,9 @@
-#include "resource_management/resources/resource.hpp"
-#include "json/json.hpp"
 #include <filesystem>
 #include <fstream>
+
 #include <resource_management/resources/texture.hpp>
+
+#include <json/json.hpp>
 
 
 using namespace engine::resource_management;

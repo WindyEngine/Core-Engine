@@ -1,7 +1,7 @@
 #include <fstream>
-#include <iomanip>
-#include <resource_management/file.hpp>
 #include <sstream>
+
+#include <resource_management/file.hpp>
 
 
 std::string engine::resource_management::readFile(std::string path) {

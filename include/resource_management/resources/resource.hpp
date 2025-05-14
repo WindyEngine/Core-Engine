@@ -1,14 +1,13 @@
-/// @file resource.hpp
 #pragma once
 
 #include <chrono>
-#include <cstddef>
-#include <functional>
 #include <memory>
-#include <mutex>
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include <unordered_map>
+#include <functional>
+#include <mutex>
+
 #include <filewatch/FileWatch.hpp>
 
 

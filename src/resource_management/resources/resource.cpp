@@ -12,7 +12,7 @@ ResourceEvent::operator Value() const {
   return this->_value;
 }
 
-Resource::Resource(std::string path) : _path(path) {}
+Resource::Resource(std::string name, std::string path) : _name(name), _path(path) {}
 
 void Resource::emit(ResourceEvent event) {
   auto& callbacks = this->_subscribers[event];
@@ -85,6 +85,10 @@ bool Resource::isHotReloading() {
 
 bool Resource::isLoaded() {
   return this->_loaded;
+}
+
+std::string Resource::getName() {
+  return this->_name;
 }
 
 std::string Resource::getPath() {

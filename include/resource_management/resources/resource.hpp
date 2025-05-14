@@ -48,12 +48,14 @@ protected:
   std::unique_ptr<filewatch::FileWatch<std::string>> _watcher = nullptr;
   std::chrono::steady_clock::time_point _lastReload = std::chrono::steady_clock::now();
   std::mutex _reloadMutex;
+
+  std::string _name;
   bool _loaded = false;
   std::string _path;
   bool _hot_reload = false;
 
 public:
-  Resource(std::string path);
+  Resource(std::string name, std::string path);
   virtual ~Resource() = default;
 
   virtual bool load() = 0;
@@ -74,6 +76,7 @@ public:
   void setHotReload(bool state);
   bool isHotReloading();
   bool isLoaded();
+  std::string getName();
   std::string getPath();
   size_t getSize();
 };
@@ -82,7 +85,7 @@ class ResourceLoader {
 public:
   virtual ~ResourceLoader() = default;
 
-  virtual ResourceHandle<Resource> load(std::string path, bool lazy) = 0;
+  virtual ResourceHandle<Resource> load(std::string name, std::string path, bool lazy) = 0;
   virtual void create(std::string path) = 0;
 };
 

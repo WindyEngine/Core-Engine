@@ -8,6 +8,7 @@
 ### Linux
 - CMake
 - Vulkan SDK
+- Slang
 ### macOS
 - CMake
 

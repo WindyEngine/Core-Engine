@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_0',['Get',['../classengine_1_1resource__management_1_1ResourceManager.html#ae6ebf0e5582eaf2926a6ad830fb88180',1,'engine::resource_management::ResourceManager']]]
+  ['emit_0',['emit',['../classengine_1_1resource__management_1_1Resource.html#aa353163b458d4f6e52e9fbe935d0121d',1,'engine::resource_management::Resource']]]
 ];

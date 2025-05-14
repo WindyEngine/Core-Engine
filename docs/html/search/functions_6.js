@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['registerloader_0',['registerLoader',['../classengine_1_1resource__management_1_1ResourceManager.html#a91be784296a3bad75e352011b5b2c140',1,'engine::resource_management::ResourceManager']]],
-  ['reload_1',['reload',['../classengine_1_1resource__management_1_1Resource.html#a03b5ac4d3c09e32d74850ef3b67bc462',1,'engine::resource_management::Resource']]],
-  ['resource_2',['Resource',['../classengine_1_1resource__management_1_1Resource.html#a49db9ff85243839cee43a9b1b2101669',1,'engine::resource_management::Resource::Resource()'],['../classengine_1_1resource__management_1_1Shader.html#a49db9ff85243839cee43a9b1b2101669',1,'engine::resource_management::Shader::Resource()']]],
-  ['resourcemanager_3',['ResourceManager',['../classengine_1_1resource__management_1_1ResourceManager.html#a3c8d4451c20672ec07bb656ef1311025',1,'engine::resource_management::ResourceManager']]]
+  ['operator_20value_0',['operator Value',['../classengine_1_1resource__management_1_1ResourceEvent.html#a4a8fb5a3c9f33aa0817a1a434ebe51ef',1,'engine::resource_management::ResourceEvent']]],
+  ['operator_3d_1',['operator=',['../classengine_1_1resource__management_1_1ResourceManager.html#a3819b225f8ab3bbf672d8fa53a2a7901',1,'engine::resource_management::ResourceManager::operator=()'],['../classengine_1_1resource__management_1_1ShaderCompiler.html#adf94986f3886de175b3f8b19706ecd91',1,'engine::resource_management::ShaderCompiler::operator=()']]]
 ];

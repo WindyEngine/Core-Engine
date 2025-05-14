@@ -105,59 +105,73 @@ $(function(){initNavTree('resource_8hpp.html',''); initResizable(true); });
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">resource.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;ctime&gt;</code><br />
-<code>#include &lt;functional&gt;</code><br />
+
+<p>Declares the core classes and interfaces for resource management within the engine.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
 <code>#include &lt;filewatch/FileWatch.hpp&gt;</code><br />
 </div>
 <p><a href="resource_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1resource__management_1_1ResourceEvent.html">engine::resource_management::ResourceEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an event associated with a resource's lifecycle.  <a href="classengine_1_1resource__management_1_1ResourceEvent.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1resource__management_1_1Resource.html">engine::resource_management::Resource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class representing a generic loadable resource.  <a href="classengine_1_1resource__management_1_1Resource.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for all loadable and reloadable resources.  <a href="classengine_1_1resource__management_1_1Resource.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1resource__management_1_1ResourceLoader.html">engine::resource_management::ResourceLoader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for resource loaders.  <a href="classengine_1_1resource__management_1_1ResourceLoader.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for loading and creating new resources.  <a href="classengine_1_1resource__management_1_1ResourceLoader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a85b96fcc234f614ac7acb60aff4d3d39" id="r_a85b96fcc234f614ac7acb60aff4d3d39"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85b96fcc234f614ac7acb60aff4d3d39">engine::resource_management::ResourceEvent</a> { <a class="el" href="#a85b96fcc234f614ac7acb60aff4d3d39af4ec5f57bd4d31b803312d873be40da9">Change</a>
- }</td></tr>
-<tr class="separator:a85b96fcc234f614ac7acb60aff4d3d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a18bc9041749e275e858aad0325358d1f" id="r_a18bc9041749e275e858aad0325358d1f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a18bc9041749e275e858aad0325358d1f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a18bc9041749e275e858aad0325358d1f">engine::resource_management::ResourceHandle</a> = std::shared_ptr&lt;T&gt;</td></tr>
+<tr class="memdesc:a18bc9041749e275e858aad0325358d1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for a generic resource handle using <code>std::shared_ptr</code>.  <br /></td></tr>
+<tr class="separator:a18bc9041749e275e858aad0325358d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96209c1e9d7df7a39aac58cfd7e23913" id="r_a96209c1e9d7df7a39aac58cfd7e23913"><td class="memItemLeft" align="right" valign="top"><a id="a96209c1e9d7df7a39aac58cfd7e23913" name="a96209c1e9d7df7a39aac58cfd7e23913"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>engine::resource_management::GenericResourceHandle</b> = <a class="el" href="#a18bc9041749e275e858aad0325358d1f">ResourceHandle</a>&lt;<a class="el" href="classengine_1_1resource__management_1_1Resource.html">Resource</a>&gt;</td></tr>
+<tr class="memdesc:a96209c1e9d7df7a39aac58cfd7e23913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for a handle to a generic (non-templated) resource. <br /></td></tr>
+<tr class="separator:a96209c1e9d7df7a39aac58cfd7e23913"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a85b96fcc234f614ac7acb60aff4d3d39" name="a85b96fcc234f614ac7acb60aff4d3d39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85b96fcc234f614ac7acb60aff4d3d39">&#9670;&#160;</a></span>ResourceEvent</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Declares the core classes and interfaces for resource management within the engine. </p>
+<p>This file contains declarations for the <code>Resource</code>, <code>ResourceLoader</code>, and <code>ResourceEvent</code> classes used for managing, loading, unloading, and hot-reloading various engine resources. It provides facilities for dependency tracking, change propagation, and observer pattern implementation to handle resource-related events. </p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a18bc9041749e275e858aad0325358d1f" name="a18bc9041749e275e858aad0325358d1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18bc9041749e275e858aad0325358d1f">&#9670;&#160;</a></span>ResourceHandle</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#a85b96fcc234f614ac7acb60aff4d3d39">engine::resource_management::ResourceEvent</a></td>
+          <td class="memname">using <a class="el" href="#a18bc9041749e275e858aad0325358d1f">engine::resource_management::ResourceHandle</a> = std::shared_ptr&lt;T&gt;</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a85b96fcc234f614ac7acb60aff4d3d39af4ec5f57bd4d31b803312d873be40da9" name="a85b96fcc234f614ac7acb60aff4d3d39af4ec5f57bd4d31b803312d873be40da9"></a>Change&#160;</td><td class="fielddoc"><p>Indicates the resource has changed (e.g., reloaded). </p>
-</td></tr>
-</table>
+
+<p>Type alias for a generic resource handle using <code>std::shared_ptr</code>. </p>
+<p>This alias is used to represent a handle to any resource managed by the engine.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of resource. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

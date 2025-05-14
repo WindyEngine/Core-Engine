@@ -1,5 +1,4 @@
 var dir_2559567b361f07c773f9d9dac257f09a =
 [
-    [ "helloTriangle.hpp", "helloTriangle_8hpp_source.html", null ],
-    [ "window.hpp", "window_8hpp_source.html", null ]
+    [ "helloTriangle.hpp", "helloTriangle_8hpp_source.html", null ]
 ];

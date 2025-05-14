@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['resource_0',['Resource',['../classengine_1_1resource__management_1_1Resource.html',1,'engine::resource_management']]],
-  ['resourceloader_1',['ResourceLoader',['../classengine_1_1resource__management_1_1ResourceLoader.html',1,'engine::resource_management']]],
-  ['resourcemanager_2',['ResourceManager',['../classengine_1_1resource__management_1_1ResourceManager.html',1,'engine::resource_management']]]
+  ['metalrenderer_0',['MetalRenderer',['../classMetalRenderer.html',1,'']]],
+  ['metalview_1',['MetalView',['../interfaceMetalView.html',1,'']]],
+  ['metalwindow_2',['MetalWindow',['../classMetalWindow.html',1,'']]]
 ];

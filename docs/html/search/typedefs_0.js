@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resourceeventcallbackmap_0',['ResourceEventCallbackMap',['../classengine_1_1resource__management_1_1Resource.html#a702213f4e5d610fa6ef55fd3b5c597ba',1,'engine::resource_management::Resource']]]
+  ['genericresourcehandle_0',['GenericResourceHandle',['../resource_8hpp.html#a96209c1e9d7df7a39aac58cfd7e23913',1,'engine::resource_management']]]
 ];

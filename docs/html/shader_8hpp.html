@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game Engine: include/resource_management/resources/shader.hpp File Reference</title>
+<title>Game Engine: include/resource_management/resources/shader/shader.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -108,26 +108,31 @@ $(function(){initNavTree('shader_8hpp.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">shader.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;<a class="el" href="resource_8hpp_source.html">resource_management/resources/resource.hpp</a>&gt;</code><br />
+
+<p>Declares the Shader resource class and its loader used in the engine's resource management system.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;<a class="el" href="shader__compiler_8hpp_source.html">resource_management/resources/shader/shader_compiler.hpp</a>&gt;</code><br />
 </div>
 <p><a href="shader_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1resource__management_1_1Shader.html">engine::resource_management::Shader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a GPU shader resource (e.g., vertex/fragment shader).  <a href="classengine_1_1resource__management_1_1Shader.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a shader resource that can be compiled into multiple target shading languages.  <a href="classengine_1_1resource__management_1_1Shader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1resource__management_1_1ShaderLoader.html">engine::resource_management::ShaderLoader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classengine_1_1resource__management_1_1Resource.html" title="Abstract base class representing a generic loadable resource.">Resource</a> loader for <a class="el" href="classengine_1_1resource__management_1_1Shader.html" title="Represents a GPU shader resource (e.g., vertex/fragment shader).">Shader</a> objects.  <a href="classengine_1_1resource__management_1_1ShaderLoader.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Responsible for loading and creating <a class="el" href="classengine_1_1resource__management_1_1Shader.html" title="Represents a shader resource that can be compiled into multiple target shading languages.">Shader</a> resources.  <a href="classengine_1_1resource__management_1_1ShaderLoader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Declares the Shader resource class and its loader used in the engine's resource management system. </p>
+<p>This header defines a concrete implementation of the <code>Resource</code> base class for shaders. It supports multiple output formats including HLSL, GLSL, MSL, and SPIR-V, and integrates with the shader compiler backend. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2ebbcfd88fdacdfff706409051e46c66.html">resource_management</a></li><li class="navelem"><a class="el" href="dir_6abb7c0e7cea04ec8784657dd0435a33.html">resources</a></li><li class="navelem"><a class="el" href="shader_8hpp.html">shader.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2ebbcfd88fdacdfff706409051e46c66.html">resource_management</a></li><li class="navelem"><a class="el" href="dir_6abb7c0e7cea04ec8784657dd0435a33.html">resources</a></li><li class="navelem"><a class="el" href="dir_8267d9c9ee31d218a5d44f10c7910c24.html">shader</a></li><li class="navelem"><a class="el" href="shader_8hpp.html">shader.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

@@ -138,7 +138,7 @@ public:
    * @param lazy If true, the shader is initialized but not fully compiled until first use.
    * @return A `ResourceHandle` to the loaded shader.
    */
-  ResourceHandle<Resource> load(std::string name, std::string path, bool lazy) override;
+  ResourceHandle<Resource> load(std::string path, bool lazy) override;
 
   /**
    * @brief Creates a new shader resource file at the given path.

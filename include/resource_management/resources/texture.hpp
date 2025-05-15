@@ -97,7 +97,7 @@ public:
    * @param lazy If `true`, the texture is registered but not loaded until used.
    * @return A shared pointer to the loaded `Texture` resource.
    */
-  ResourceHandle<Resource> load(std::string name, std::string path, bool lazy) override;
+  ResourceHandle<Resource> load(std::string path, bool lazy) override;
 
   /**
    * @brief Creates a new texture resource file at the specified path.

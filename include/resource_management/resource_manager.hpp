@@ -138,39 +138,52 @@ public:
    * @return A shared pointer to the loaded resource, or nullptr if loading failed.
    */
   template<typename T>
-  ResourceHandle<T> load(std::string path, std::string name = "", bool hot_reload = false, bool lazy = false) {
+  ResourceHandle<T> load(std::string path, bool hot_reload = false, bool lazy = false) {
+    // Combine asset root with input path, and normalize the result to an absolute clean path.
     std::filesystem::path fullPath(_assetPath + "/" + path);
     std::string normalizedPath = std::filesystem::absolute(fullPath).lexically_normal().string();
 
-    if (name.empty()) {
-      name = std::filesystem::path(normalizedPath).filename().replace_extension().string();
-    }
-
     {
+      // Acquire a shared (read) lock to check if the resource already exists in cache.
       std::shared_lock<std::shared_mutex> readLock(this->_cacheMutex);
       auto& typeCache = this->_cache[typeid(T)];
+
+      // Attempt to retrieve the cached resource from the type-specific cache.
       if (auto cached = typeCache[normalizedPath].lock()) {
+        // If found and valid, update hot reload flag and return it.
         cached->setHotReload(hot_reload);
         return cached->cast<T>();
       }
     }
 
+    // Acquire a unique (write) lock since we're about to modify the cache.
     std::unique_lock<std::shared_mutex> writeLock(this->_cacheMutex);
     auto& typeCache = this->_cache[typeid(T)];
+
+    // Double-check in case the resource was inserted by another thread in the meantime.
     if (auto cached = typeCache[normalizedPath].lock()) {
       cached->setHotReload(hot_reload);
       return cached->cast<T>();
     }
 
+    // Acquire a lock to access the loader map.
     std::unique_lock<std::mutex> loaderLock(this->_loaderMutex);
-    auto loaderIt = this->_loaders.find(typeid(T));
-    if (loaderIt == this->_loaders.end()) return nullptr;
 
-    ResourceHandle<Resource> resource = loaderIt->second->load(name, normalizedPath, lazy);
+    // Look for the loader registered for the resource type T.
+    auto loaderIt = this->_loaders.find(typeid(T));
+    if (loaderIt == this->_loaders.end()) return nullptr; // No loader registered for this type, cannot load.
+
+    // Use the loader to load the resource with the provided name and normalized path.
+    ResourceHandle<Resource> resource = loaderIt->second->load(normalizedPath, lazy);
     resource->setHotReload(hot_reload);
+
+    // Unlock loader mutex early to avoid unnecessary blocking.
     loaderLock.unlock();
 
+    // Insert the newly loaded resource into the cache.
     typeCache[normalizedPath] = resource;
+
+    // Return the resource cast to the correct type.
     return resource->cast<T>();
   }
 

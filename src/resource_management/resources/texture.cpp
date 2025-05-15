@@ -38,13 +38,14 @@ void Texture::save() {
   if (!metaFile) return;
 
   nlohmann::json metadata;
+  metadata["name"] = this->_name;
   metadata["type"] = "texture";
   metadata["sourceFile"] = std::filesystem::path(this->_path).filename().string();
 
   metaFile << metadata.dump(2);
 }
 
-ResourceHandle<Resource> TextureLoader::load(std::string name, std::string path, bool lazy) {
+ResourceHandle<Resource> TextureLoader::load(std::string path, bool lazy) {
   std::cout << "Test" << std::endl;
   if  (!std::filesystem::exists(path + ".meta")) this->create(path);
   
@@ -56,7 +57,7 @@ ResourceHandle<Resource> TextureLoader::load(std::string name, std::string path,
 
   if (metadata["type"] != "texture") return nullptr;
 
-  Texture* rawPointer = new Texture(name, (std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
+  Texture* rawPointer = new Texture(metadata["name"], (std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
   ResourceHandle<Texture> texture = std::shared_ptr<Texture>(rawPointer);
 
   if (!lazy) texture->load();
@@ -72,6 +73,7 @@ void TextureLoader::create(std::string filePath) {
   if (!metaFile) return;
 
   nlohmann::json metadata;
+  metadata["name"] = std::filesystem::path(filePath).filename().replace_extension().string();
   metadata["sourceFile"] = std::filesystem::path(filePath).filename().string() + ".png";
   metadata["type"] = "texture";
 

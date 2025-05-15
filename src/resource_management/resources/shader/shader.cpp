@@ -12,12 +12,12 @@ using namespace engine::resource_management;
 const std::string Shader::extension = ".slang";
 
 Shader::~Shader() {
-  ResourceHandle<Shader> temp(this, [](Shader* ptr){});
+  ResourceHandle<Shader> temp(this, [](Shader* ptr){}); // No-op deleter to avoid double delete
   this->unload();
 }
 
 std::string Shader::getSourceCode() {
-  this->load();
+  this->load(); // Ensure the shader is loaded before accessing the source code
   return this->_sourceCode;
 }
 
@@ -67,13 +67,14 @@ void Shader::save() {
   if (!metaFile) return;
 
   nlohmann::json metadata;
+  metadata["name"] = this->_name;
   metadata["type"] = "shader";
   metadata["sourceFile"] = std::filesystem::path(this->_path).filename().string();
 
   metaFile << metadata.dump(2);
 }
 
-ResourceHandle<Resource> ShaderLoader::load(std::string name, std::string path, bool lazy) {
+ResourceHandle<Resource> ShaderLoader::load(std::string path, bool lazy) {
   if (!std::filesystem::exists(path + ".meta")) this->create(path);
 
   std::ifstream metaFile(path + ".meta");
@@ -84,7 +85,7 @@ ResourceHandle<Resource> ShaderLoader::load(std::string name, std::string path, 
 
   if (metadata["type"] != "shader") return nullptr;
 
-  Shader* rawPointer = new Shader(name, (std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
+  Shader* rawPointer = new Shader(metadata["name"], (std::filesystem::path(path).parent_path() / metadata["sourceFile"]).string());
   ResourceHandle<Shader> shader = std::shared_ptr<Shader>(rawPointer); 
 
   if (!lazy) shader->load();
@@ -99,6 +100,7 @@ void ShaderLoader::create(std::string filePath) {
   if (!metaFile) return;
 
   nlohmann::json metadata;
+  metadata["name"] = std::filesystem::path(filePath).filename().replace_extension().string();
   metadata["sourceFile"] = std::filesystem::path(filePath).filename().string() + Shader::extension;
   metadata["type"] = "shader";
 

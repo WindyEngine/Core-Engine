@@ -275,7 +275,7 @@ public:
    * @param lazy If `true`, the resource will be initialized without loading data until required.
    * @return A handle to the loaded resource.
    */
-  virtual ResourceHandle<Resource> load(std::string name, std::string path, bool lazy) = 0;
+  virtual ResourceHandle<Resource> load(std::string path, bool lazy) = 0;
 
   /**
    * @brief Creates a new resource at the specified path.

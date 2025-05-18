@@ -22,7 +22,7 @@ std::shared_ptr<Window> WindowManager::createWindow(int width, int height, const
             break;
         
         case WindowAPI::Win32:
-        #if PLATFORM_WINDOWS
+        #if defined(_WIN64)
             window = std::make_shared<Win32Window>(width, height, name);
         #else
             throw std::runtime_error("Win32 API is not supported on this platform");
@@ -30,7 +30,7 @@ std::shared_ptr<Window> WindowManager::createWindow(int width, int height, const
             break;
 
         case WindowAPI::Cocoa:
-        #if PLATFORM_MACOS
+        #if defined(__APPLE__) && defined(__MACH__)
             window = std::make_shared<CocoaWindow>(width, height, name);
         #else
             throw std::runtime_error("Cocoa API is not supported on this platform");

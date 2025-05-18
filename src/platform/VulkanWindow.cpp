@@ -1,4 +1,4 @@
-#pragma once
+/*
 
 #include <platform/window.hpp>
 #include <iostream>
@@ -413,3 +413,4 @@ bool VulkanWindow::shouldClose(){
     return glfwWindowShouldClose(_window);
 }
 #endif
+*/

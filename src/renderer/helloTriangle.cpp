@@ -1,5 +1,4 @@
-#pragma once
-
+/*
 #include <renderer/helloTriangle.hpp>
 
 using namespace engine::core;
@@ -293,7 +292,8 @@ void VulkanTriangle(){
     }
 }
 #endif
-
+*/
+/*
 #ifdef ENGINE_COMPILE_DIRECTX
 void DirectXTriangle(){
     DirectXWindow window(800, 600, "DX Window");
@@ -312,6 +312,7 @@ void DirectXTriangle(){
     //Buffer desc setup START
     /*this setup a vertex buffer that will only be used by the gpu it holds the vertex data which will be used---
     later on by the pipline is the buffer*/
+    /*
     D3D11_BUFFER_DESC bufferDesc = {}; //zeros the buffer desc
     bufferDesc.Usage = D3D11_USAGE_DEFAULT; //defualt useage of the buffer means it will live on the GPU
     bufferDesc.ByteWidth = sizeof(vertices); //gets the byte size of the vertices 
@@ -373,4 +374,4 @@ void DirectXTriangle(){
     }
 
 }
-#endif
+    */

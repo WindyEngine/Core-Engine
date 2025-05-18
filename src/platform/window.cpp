@@ -1,3 +1,4 @@
+/*
 #include <platform/window.hpp>
 #include <iostream>
 
@@ -49,3 +50,4 @@ bool OpenGLWindow::shouldClose() {
     return glfwWindowShouldClose(_window);
 }
 #endif
+*/

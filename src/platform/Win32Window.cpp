@@ -1,14 +1,11 @@
 #pragma once
 
-#include <platform/window.hpp>
+#include <platform/window_manager.hpp>
+
+#include <iostream>
+
 
 using namespace engine::platform;
-
-
-#ifdef ENGINE_COMPILE_DIRECTX
-ID3D11DeviceContext* DirectXWindow::context = nullptr;
-ID3D11Device* DirectXWindow::device = nullptr;
-ID3D11InputLayout* DirectXWindow::inputLayout = nullptr;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
     if(uMsg == WM_DESTROY){
@@ -19,33 +16,37 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 }
 
 
-DirectXWindow::DirectXWindow(int width, int height, const char* name) : _width(width), _height(height), _windowName(name), _hwnd(nullptr) {
-    _hInstance = GetModuleHandle(nullptr);
+Win32Window::Win32Window(int width, int height, const char* name) : _width(width), _height(height), _name(name){
+    _hInstance = GetModuleHandleA(nullptr);
+    initWindow();
 }
 
-DirectXWindow::~DirectXWindow(){
-    DirectXWindow::context->Release();
-    DirectXWindow::device->Release();
+Win32Window::~Win32Window(){
+    closeWindow();
+    /*
+    Win32Window::context->Release();
+    Win32Window::device->Release();
     renderTargetView->Release();
     swapChain->Release();
-    DestroyWindow(_hwnd);
+    */
 }
 
-void DirectXWindow::initWindow(){
-    const char CLASS_NAME[] = "DXWindowClass";
-
-    WNDCLASS wc = {};
+void Win32Window::initWindow(){
+    WNDCLASSEXA wc = {};
+    wc.cbSize = sizeof(WNDCLASSEXA);
     wc.lpfnWndProc = WindowProc;
     wc.hInstance = _hInstance;
-    wc.lpszClassName = CLASS_NAME;
-    RegisterClassA(&wc);
+    wc.lpszClassName = "DXWindow";
+    RegisterClassExA(&wc);
 
-    _hwnd = CreateWindowEx(
-        0, CLASS_NAME, _windowName, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+    _hwnd = CreateWindowExA(
+        0, "DXWindow", _name, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
         CW_USEDEFAULT, _width, _height, nullptr, nullptr, _hInstance, nullptr
     );
-    ShowWindow(_hwnd, SW_SHOW);
+
     
+    /*
+    //window creation ends here everything below in this function has to do with rendering part should be removed later
     DXGI_SWAP_CHAIN_DESC scd = {}; //initializes the backbuffer with default values
     scd.BufferCount = 1; //creates 1 backbuffer that will drawn on and shown then switches back and forht
     scd.BufferDesc.Width = _width; //width of the backbuffer
@@ -67,10 +68,12 @@ void DirectXWindow::initWindow(){
     swapChain->GetBuffer(0, _uuidof(ID3D11Texture2D), (void**)&backBuffer); //gets the buffer pointer and casts into the backbuffer
     device->CreateRenderTargetView(backBuffer, nullptr, &renderTargetView); //this gives the destination as to where the gpu is supposed to draw (i think)
     backBuffer->Release(); //release the backbuffer (the render target view holds the refrence now so its useless to hold it any longer)
+    */
 }
 
-
-void DirectXWindow::clear(){
+/*
+void Win32Window::clear(){
+    
     context->OMSetRenderTargets(1, &renderTargetView, nullptr); //tells dx to actually draw on the RT
     float clearColor[] = {0.1f, 0.2f, 0.3f, 1.0f}; //the color format for the window (rgba) you can change it to whatever color
     context->ClearRenderTargetView(renderTargetView, clearColor); //clears the backbuffer which is now the RTV to the clearColor format (blue atm)
@@ -85,16 +88,22 @@ void DirectXWindow::clear(){
     DirectXWindow::context->RSSetViewports(1, &viewport);
     //View Port Creation
 }
+*/
 
-void DirectXWindow::show(){
-    swapChain->Present(1,0); //presents the backbuffer after its "drawn" on
+void Win32Window::showWindow(){
+    ShowWindow(this->_hwnd, SW_SHOW);
+    //swapChain->Present(1,0); //presents the backbuffer after its "drawn" on
 }
 
-float DirectXWindow::update(){
-    return 1.0;
+void Win32Window::hideWindow(){
+    ShowWindow(this->_hwnd, SW_HIDE);
 }
 
-bool DirectXWindow::shouldClose(){
+void Win32Window::closeWindow(){
+    PostMessage(this->_hwnd, WM_CLOSE, 0, 0);
+}
+
+bool Win32Window::shouldClose() const {
     MSG msg = {};
     while(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
         TranslateMessage(&msg);
@@ -103,4 +112,31 @@ bool DirectXWindow::shouldClose(){
     }
     return false;
 }
-#endif
+
+void Win32Window::setName(const char* name){
+    this->_name = name;
+    if(this->_hwnd){
+        SetWindowTextA(this->_hwnd, _name);
+    }
+}
+
+char* Win32Window::getName() const {
+    std::cout << "Window Name set to: " << this->_name << std::endl;
+    return const_cast<char*>(this->_name);
+}
+
+std::pair<int, int> Win32Window::getSize() const {
+    return { this->_width, this->_height };
+}
+
+void Win32Window::resize(int width, int height) {
+    this->_width = width;
+    this->_height = height;
+    if (this->_hwnd) {
+        SetWindowPos(_hwnd, nullptr, 0, 0, this->_width, this->_height, SWP_NOMOVE | SWP_NOZORDER);
+    }
+}
+
+void* Win32Window::getWindow() const {
+    return this->_hwnd;
+}

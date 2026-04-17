@@ -1,13 +1,13 @@
 
 # Collect platform sources
-# set(PLATFORM_SOURCES)
+set(PLATFORM_SOURCES)
 
 # ---------------------------------------------
 # Core
 # ---------------------------------------------
-# list(APPEND PLATFORM_SOURCES
-    
-# )
+list(APPEND PLATFORM_SOURCES
+    filesystem.cpp    
+)
 
 # ---------------------------------------------
 # OS-specific
@@ -24,7 +24,8 @@
 # Platform library target
 # ---------------------------------------------
 windy_add_library(platform
-    HEADER_ONLY
+    SOURCES ${PLATFORM_SOURCES}    
+
     INCLUDE_DIRS
         ${CMAKE_SOURCE_DIR}/include
 )

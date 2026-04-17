@@ -1,34 +1,13 @@
-# file(GLOB SRC "*.cpp")
-# add_library(platform ${SRC})
-
-# if (ENABLE_METAL)
-#   file(GLOB_RECURSE OBJ_SRC "*.mm")
-#   target_sources(platform PRIVATE ${OBJ_SRC})
-#   target_link_libraries(platform ${METAL_LIBS})
-# endif()
-# if(ENABLE_OPENGL)
-#   target_link_libraries(platform ${OPENGL_LIBS})
-# endif()
-# if(ENABLE_VULKAN)
-#   if(WIN32)
-    
-#     link_directories(platform "${VULKAN_SDK}/Lib")
-#     target_link_libraries(platform "${VULKAN_SDK}/Lib/vulkan-1.lib")
-#   elseif(UNIX)
-#     target_link_libraries(platform vulkan)
-#   endif()
-# endif()
-
 
 # Collect platform sources
-set(PLATFORM_SOURCES)
+# set(PLATFORM_SOURCES)
 
 # ---------------------------------------------
 # Core
 # ---------------------------------------------
-list(APPEND PLATFORM_SOURCES
-    platform_detection.cpp
-)
+# list(APPEND PLATFORM_SOURCES
+    
+# )
 
 # ---------------------------------------------
 # OS-specific
@@ -45,8 +24,7 @@ list(APPEND PLATFORM_SOURCES
 # Platform library target
 # ---------------------------------------------
 windy_add_library(platform
-    SOURCES ${PLATFORM_SOURCES}
-
+    HEADER_ONLY
     INCLUDE_DIRS
         ${CMAKE_SOURCE_DIR}/include
 )

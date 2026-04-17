@@ -6,19 +6,20 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 /**
- * @namespace Windy
- * @brief The core namespace for the Windy Engine
+ * @namespace Windy::Platform
+ * @brief Contains low-level hardware abstraction and platform-specific logic
  */
-namespace Windy {
-    /**
-     * @brief Represents an 8-bit unsigned byte of data
-     */
-    using Byte = std::uint8_t;
-
+namespace Windy::Platform {
     /**
      * @brief The primary floating-point type for engine-wide calculations
      */
     using Real = double;
+
+    /**
+     * @brief The default string type for text and path manipulation
+     */
+    using String = std::string;
 }

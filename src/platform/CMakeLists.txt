@@ -6,7 +6,8 @@ set(PLATFORM_SOURCES)
 # Core
 # ---------------------------------------------
 list(APPEND PLATFORM_SOURCES
-    filesystem.cpp    
+    filesystem.cpp
+    network.cpp
 )
 
 # ---------------------------------------------

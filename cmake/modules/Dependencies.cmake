@@ -3,6 +3,13 @@
 # ---------------------------------------------
 # Each library inside libs/ must expose a CMake target.
 
+list(APPEND CMAKE_MODULE_PATH
+  "${CMAKE_SOURCE_DIR}/cmake/dependencies"
+)
+
+# Asio
+include(Asio)
+
 # glfw
 # if(EXISTS "${CMAKE_SOURCE_DIR}/libs/glfw/CMakeLists.txt")
 #     add_subdirectory(${CMAKE_SOURCE_DIR}/libs/glfw)
@@ -24,6 +31,9 @@
 # ---------------------------------------------
 # Libs Alias Normalization
 # ---------------------------------------------
+if(TARGET asio::asio)
+    add_library(Windy::asio ALIAS asio::asio)
+endif()
 # if(TARGET glfw)
 #     add_library(Windy::glfw ALIAS glfw)
 # endif()

@@ -1,7 +1,17 @@
-#include <iostream>
+#include <core/engine.hpp>
+
+
+using namespace Windy::Core;
 
 int main()
 {
-    std::cout << "hello" << std::endl;
+    Engine engine;
+
+    engine.init();
+
+    // What ever code you want;
+
+    engine.shutdown();
+
     return 0;
 }
